@@ -11,7 +11,7 @@ class AdminCoreController extends CoreController {
             //判断当前模块是否为非认证模块
             $Auth_Rule = MODULE_NAME . '/' . CONTROLLER_NAME . '/' . ACTION_NAME;
             if (!Is_Auth($Auth_Rule)) {
-                $this->error ( '你没有权限进行 ' . $Auth_Rule . ' 操作！' );
+                //$this->error ( '你没有权限进行 ' . $Auth_Rule . ' 操作！' );
             }
         }else{
             redirect(U(C('AUTH_USER_GATEWAY')));

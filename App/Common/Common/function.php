@@ -837,8 +837,12 @@ function p($data)
 function successData($data){
     $res['Code'] = 200;
     $res['Data'] = $data;
+    return $res;
+//    echo json_encode($res);
 }
 function errorData($msg){
     $res['Code'] = 400;
     $res['Msg'] = $msg;
+    return $res;
+//    echo json_encode($res);
 }

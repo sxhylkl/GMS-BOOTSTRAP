@@ -15,25 +15,29 @@
             <!--<div class="info">—— V {:C('SOFT_VERSION')}</div>-->
         </div>
         <div class="login_form">
-            <form class="form-horizontal" role="form" method="post" onsubmit="visibleForm()">
+            <form class="form-horizontal" role="form" method="post">
+
+
+                <div class="alert alert-error hide">
+
+                    <button class="close" data-dismiss="alert"></button>
+
+                    <span>Enter any username and password.</span>
+
+                </div>
+
                 <div class="form-group">
                     <label for="inpUser" class="col-sm-2 control-label">用户名</label>
                     <div class="col-sm-10">
-                        <input id="userTip" type="text" class="form-control"
-                               id="inpUser" placeholder="用户名" data-toggle="tooltip"
-                               title="adsfasdfs" data-placement="bottom"
-                               data-animation="">
-                        <!-- HTML to write -->
-                        <!--<a  href="#" >-->
-
-                        <!--</a>-->
+                        <input type="text" class="form-control"
+                               id="inpUser" placeholder="用户名" name="username">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inpPwd" class="col-sm-2 control-label">密码&nbsp</label>
                     <div class="col-sm-10">
                         <input type="password" class="form-control" id="inpPwd"
-                               placeholder="密码">
+                               placeholder="密码" name="password">
                     </div>
                 </div>
                 <div class="form-group">
@@ -45,6 +49,7 @@
             </form>
         </div>
     </div>
+    <js href="Public/Static/Jquery/jquery.validate.min.js"/>
     <js href="Public/Admin/js/login.js"/>
     </body>
 </block>
