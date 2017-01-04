@@ -508,6 +508,7 @@ ul.page-sidebar-menu {
     padding: 0;
     margin: 0;
     padding: 0;
+    background-color: #fff;
 }
 
 ul.page-sidebar-menu > li {
@@ -515,7 +516,7 @@ ul.page-sidebar-menu > li {
     /* margin: 0; */
     /* padding: 0; */
     /* border: 0px; */
-    border-bottom: 1px #000000 solid;
+    border-bottom: solid 1px #cccccc;
 }
 
 ul.page-sidebar-menu > li.start > a {
@@ -601,8 +602,9 @@ ul.page-sidebar-menu > li > ul.sub-menu {
     display: none;
     list-style: none;
     clear: both;
-    margin: 8px 0px 8px 0px;
+    margin: 0px 0px 0px 0px;
     padding-left: 10px;
+
 }
 
 ul.page-sidebar-menu > li.active > ul.sub-menu {
