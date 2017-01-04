@@ -153,7 +153,7 @@ class Auth{
 		}
 
 		$map['status']=1;
-		$map['id'] = $group_ids;
+		$map['id'] = array('in',$group_ids);
         $user_groups = M()
             ->table($this->_config['AUTH_GROUP'])
             ->where($map)

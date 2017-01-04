@@ -11,19 +11,19 @@ function handleSidebarMenu() {
 
         var parent = $(this).parent().parent();
 
-        parent.children('li.open').children('a').children('.arrow').removeClass('open');
+        parent.children('li.open').children('a').children('.icon').removeClass('open');
         parent.children('li.open').children('.sub-menu').slideUp(200);
         parent.children('li.open').removeClass('open');
 
         var sub = jQuery(this).next();
         if (sub.is(":visible")) {
-            jQuery('.arrow', jQuery(this)).removeClass("open");
+            jQuery('.icon', jQuery(this)).removeClass("open");
             jQuery(this).parent().removeClass("open");
             sub.slideUp(200, function () {
                 handleSidebarAndContentHeight();
             });
         } else {
-            jQuery('.arrow', jQuery(this)).addClass("open");
+            jQuery('.icon', jQuery(this)).addClass("open");
             jQuery(this).parent().addClass("open");
             sub.slideDown(200, function () {
                 handleSidebarAndContentHeight();

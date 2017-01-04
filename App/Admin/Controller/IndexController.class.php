@@ -12,7 +12,8 @@ class IndexController extends AdminCoreController {
      * 后台首页操作
      */
     public function index(){
-		$this->assign ( 'AdminMenu', $this->get_menu());
+//        dump($this->get_menu());
+		$this->assign ( 'Menu', $this->get_menu());
 		$this->display ();
     }
 	

@@ -1,13 +1,191 @@
-.close {
-    display: inline-block;
-    margin-top: 0px;
-    margin-right: 0px;
-    width: 9px;
-    height: 9px;
-    background-repeat: no-repeat !important;
-    background-image: url("../image/remove-icon-small.png") !important;
+
+/***
+ie8 & ie9 modes
+***/
+.visible-ie8 {
+    display: none;
 }
 
+.ie8 .visible-ie8 {
+    display: inherit !important;
+}
+
+.visible-ie9 {
+    display: none;
+}
+
+.ie9 .visible-ie9 {
+    display: inherit !important;
+}
+
+.hidden-ie8 {
+    display: inherit;
+}
+
+.ie8 .hidden-ie8 {
+    display: none !important;
+}
+
+.hidden-ie9 {
+    display: inherit;
+}
+
+.ie9 .hidden-ie9 {
+    display: none !important;
+}
+
+/***
+Fix link outlines after click
+***/
+a,a:focus, a:hover, a:active {
+    outline: 0;
+}
+
+/***
+IE8 fix for form input height in fluid rows
+***/
+.ie8 .row-fluid [class*="span"] {
+    min-height: 20px !important;
+}
+
+/***
+Fix grid offset used for reponsive layout handling(refer app.js=>handleResponsive)
+***/
+.fix-offset {
+    margin-left: 0px !important;
+}
+
+/***
+Misc tools
+***/
+.visible-ie8 {
+    display: none
+}
+
+.no-padding {
+    padding: 0px !important;
+}
+
+.no-margin {
+    margin: 0px !important;
+}
+
+.no-bottom-space {
+    padding-bottom:0px !important;
+    margin-bottom: 0px !important;
+}
+
+.no-top-space {
+    padding-top:0px !important;
+    margin-top: 0px !important;
+}
+
+.space5 {
+    display: block;
+    height: 5px !important;
+    clear: both;
+}
+
+.space7 {
+    height: 7px !important;
+    clear: both;
+}
+
+.space10 {
+    height: 10px !important;
+    clear: both;
+}
+
+.space12 {
+    height: 12px !important;
+    clear: both;
+}
+
+.space15 {
+    height: 15px !important;
+    clear: both;
+}
+
+.space20 {
+    height: 20px !important;
+    clear: both;
+}
+
+.no-space {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.no-text-shadow {
+    text-shadow: none !important;
+}
+
+.no-left-padding {
+    padding-left: 0 !important;
+}
+
+.no-left-margin {
+    margin-left: 0 !important;
+}
+
+.margin-bottom-10 {
+    margin-bottom: 10px !important;
+}
+
+.margin-top-10 {
+    margin-top: 10px !important;
+}
+
+.margin-bottom-15 {
+    margin-bottom: 15px !important;
+}
+
+.margin-bottom-20 {
+    margin-bottom: 20px !important;
+}
+
+.margin-top-20 {
+    margin-top: 20px !important;
+}
+
+.margin-bottom-25 {
+    margin-bottom: 25px !important;
+}
+
+.hide {
+    display: none;
+}
+
+.bold {
+    font-weight:600 !important;
+}
+
+.fix-margin {
+    margin-left: 0px !important
+}
+
+.border {
+    border: 1px solid #ddd
+}
+
+.inline {
+    display: inline;
+}
+
+hr {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #E0DFDF;
+    border-bottom: 1px solid #FEFEFE;
+}
+body {
+    color: #000;
+    font-family: 'Open Sans';
+    padding: 0px !important;
+    margin: 0px !important;
+    font-size:13px;
+    direction: ltr;
+}
 .navbar {
     margin-bottom: 0;
 }
@@ -28,24 +206,10 @@
     width: 225px;
     height: 100%;
 }
-.scroll-to-top {
-    display: inline-block;
-    padding: 2px;
-    text-align: center;
-    position: fixed;
-    z-index: 10001;
-    bottom: 10px;
-    display: none;
-    right: 10px;
-}
 
-.scroll-to-top > i {
-    display: inline-block;
-    color: #687991;
-    font-size: 32px;
-    opacity: 0.7;
-    filter: alpha(opacity=70);
-}
+/***
+Page sidebar
+***/
 
 /* ie8 fixes */
 .ie8 .page-sidebar {
@@ -54,11 +218,12 @@
 }
 
 ul.page-sidebar-menu {
-    /* list-style: none; */
+    list-style: none;
     margin: 0;
     padding: 0;
     margin: 0;
     padding: 0;
+    background-color: #fff;
 }
 
 ul.page-sidebar-menu > li {
@@ -66,6 +231,7 @@ ul.page-sidebar-menu > li {
     /* margin: 0; */
     /* padding: 0; */
     /* border: 0px; */
+    border-bottom: solid 1px #cccccc;
 }
 
 ul.page-sidebar-menu > li.start > a {
@@ -82,7 +248,7 @@ ul.page-sidebar-menu > li > a {
     position: relative;
     margin: 0;
     border: 0px;
-    padding: 10px 15px;
+    padding: 5px 10px;
     text-decoration: none;
     font-size: 14px;
     font-weight: 300;
@@ -95,63 +261,38 @@ ul.page-sidebar-menu > li > a {
     transition: all 0.2s ease;
 }
 
-ul.page-sidebar-menu > li > a i {
-    font-size: 16px;
-    margin-right: 5px;
-    text-shadow:none;
-}
-
-ul.page-sidebar-menu > li.break {
-    margin-bottom: 20px;
-}
-
-ul.page-sidebar-menu > li.active > a {
-    border: none;
-    text-shadow:none;
-}
-
-ul.page-sidebar-menu > li.active > a .selected {
-    display: block;
-    width: 8px;
-    height: 25px;
-    background-image: url("../image/sidebar-menu-arrow.png");
-    float: right;
-    position: absolute;
-    right:0px;
-    top:8px;
-}
-
-.page-sidebar ul > li > a > .arrow:before {
-    float: right;
-    margin-top: 1px;
-    margin-right: 5px;
-    display: inline;
-    font-size: 16px;
-    font-family: FontAwesome;
-    height: auto;
-    content: "\f104";
-    font-weight: 300;
-    text-shadow:none;
-}
-
-ul.page-sidebar-menu > li > a > .arrow.open:before {
+/*未点击*/
+.page-sidebar ul > li > a > .icon:before {
     float: right;
     margin-top: 1px;
     margin-right: 3px;
     display: inline;
-    font-family: FontAwesome;
-    height: auto;
     font-size: 16px;
-    content: "\f107";
+    height: auto;
     font-weight: 300;
     text-shadow:none;
+    /*iconfont:icon-jiantou-you;*/
+}
+/*点击后*/
+ul.page-sidebar-menu > li > a > .icon.open:before {
+    float: right;
+    margin-top: 1px;
+    margin-right: 3px;
+    display: inline;
+    height: auto;
+    font-size: 16px;
+    font-weight: 300;
+    text-shadow:none;
+    /*iconfont:icon-jiantou-xia;*/
 }
 
 ul.page-sidebar-menu > li > ul.sub-menu {
     display: none;
     list-style: none;
     clear: both;
-    margin: 8px 0px 8px 0px;
+    margin: 0px 0px 0px 0px;
+    padding-left: 30px;
+
 }
 
 ul.page-sidebar-menu > li.active > ul.sub-menu {
@@ -168,15 +309,14 @@ ul.page-sidebar-menu > li > ul.sub-menu > li {
 ul.page-sidebar-menu > li > ul.sub-menu > li > a {
     display: block;
     margin: 0px 0px 0px 0px;
-    padding: 5px 0px;
-    padding-left: 44px !important;
+    padding: 2px 0px;
     text-decoration: none;
     font-size: 14px;
     font-weight: 300;
     background: none;
 }
 
-/* 3rd level sub menu */
+
 ul.page-sidebar-menu > li > ul.sub-menu  > li ul.sub-menu {
     display: none;
     list-style: none;
@@ -184,32 +324,30 @@ ul.page-sidebar-menu > li > ul.sub-menu  > li ul.sub-menu {
     margin: 0px 0px 0px 0px;
 }
 
-ul.page-sidebar-menu > li > ul.sub-menu  li > a > .arrow:before   {
+ul.page-sidebar-menu > li > ul.sub-menu  li > a > .icon:before   {
     float: right;
     margin-top: 1px;
     margin-right: 20px;
     display: inline;
     font-size: 16px;
-    font-family: FontAwesome;
     height: auto;
-    content: "\f104";
     font-weight: 300;
     text-shadow:none;
 }
 
-ul.page-sidebar-menu > li > ul.sub-menu  li > a > .arrow.open:before {
+ul.page-sidebar-menu > li > ul.sub-menu  li > a > .icon.open:before {
     float: right;
     margin-top: 1px;
-    margin-right: 18px;
+    margin-right: 20px;
     display: inline;
-    font-family: FontAwesome;
     height: auto;
     font-size: 16px;
-    content: "\f107";
     font-weight: 300;
     text-shadow:none;
 }
 
+
+/* 3rd level sub menu */
 ul.page-sidebar-menu > li.active > ul.sub-menu > li.active ul.sub-menu {
     display: block;
 }
@@ -232,219 +370,5 @@ ul.page-sidebar-menu > li > ul.sub-menu  li > ul.sub-menu > li > a {
 }
 
 ul.page-sidebar-menu > li > ul.sub-menu > li > ul.sub-menu > li > a {
-    padding-left: 60px;
-}
-
-ul.page-sidebar-menu > li > ul.sub-menu > li > ul.sub-menu > li > ul.sub-menu > li > a {
-    padding-left: 80px;
-}
-
-ul.page-sidebar-menu > li.active > ul.sub-menu > li.active ul.sub-menu > li.active ul.sub-menu {
-    display: block;
-}
-
-
-ul.page-sidebar-menu > li > ul.sub-menu  li > ul.sub-menu > li > a > i {
-    font-size: 13px;
-}
-
-/* sidebar search */
-
-.page-sidebar .sidebar-search {
-    margin: 8px 20px 20px 20px;
-}
-
-.page-sidebar .sidebar-search .submit {
-    display: block;
-    float: right;
-    margin-top: 8px;
-    width: 13px;
-    height: 13px;
-    background-image: url(../image/search-icon.png);
-    background-repeat: no-repeat;
-}
-
-.page-sidebar .sidebar-search input {
-    margin: 0px;
-    width: 165px;
-    border: 0px;
     padding-left: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    font-size: 14px ;
-    box-shadow: none;
-}
-
-.page-sidebar .sidebar-search .input-box {
-    padding-bottom: 2px;
-}
-
-/***
-Sidebar toggler(show/hide)
-***/
-
-.page-sidebar .sidebar-toggler {
-    cursor: pointer;
-    opacity: 0.5;
-    filter: alpha(opacity=50);
-    margin-top: 15px;
-    margin-left: 175px;
-    width: 29px;
-    height: 29px;
-    background-repeat: no-repeat;
-}
-
-.sidebar-toggler:hover {
-    filter: alpha(opacity=100);
-    opacity: 1;
-}
-
-.page-sidebar-closed .sidebar-toggler {
-    margin-left: 3px;
-}
-
-.page-sidebar-closed .page-sidebar .sidebar-search {
-    height: 34px;
-    width: 29px;
-    margin-left: 3px;
-    margin-bottom: 15px !important;
-}
-
-.page-sidebar-closed .page-sidebar .sidebar-search input {
-    display: none;
-}
-
-.page-sidebar-closed .page-sidebar .sidebar-search .submit {
-    margin: 11px 7px !important;
-    display: block !important;
-}
-
-.page-sidebar-closed .page-sidebar .sidebar-search .input-box {
-    border-bottom: 0 !important;
-}
-
-.page-sidebar-closed .page-sidebar .sidebar-search.open {
-    height: 34px;
-    width: 255px;
-    overflow: hidden;
-}
-
-.page-sidebar-closed .page-sidebar .sidebar-search.open input {
-    margin-top: 3px;
-    padding-left: 10px;
-    padding-bottom: 2px;
-    width: 180px;
-    display: inline-block !important;
-}
-
-.page-sidebar-closed .page-sidebar .sidebar-search.open .submit {
-    display: inline-block;
-    width: 13px;
-    height: 13px;
-    margin: 10px 8px 9px 6px !important;
-}
-
-.page-sidebar-closed .page-sidebar .sidebar-search.open .remove {
-    background-repeat: no-repeat;
-    width: 11px;
-    height: 11px;
-    margin: 11px 6px 7px 8px !important;
-    display: inline-block !important;
-    float: left !important;
-}
-
-.page-sidebar-closed ul.page-sidebar-menu > li > a .selected {
-    right: -3px !important;
-}
-
-.page-sidebar-closed ul.page-sidebar-menu > li > a > .title,
-.page-sidebar-closed ul.page-sidebar-menu > li > a > .arrow {
-    display: none !important;
-}
-
-.page-sidebar-closed .sidebar-toggler {
-    margin-right: 3px;
-}
-
-.page-sidebar-closed .page-sidebar .sidebar-search {
-    margin-top: 6px;
-    margin-bottom: 6px;
-}
-
-.page-sidebar-closed ul.page-sidebar-menu {
-    width: 35px !important;
-}
-
-.page-sidebar-closed ul.page-sidebar-menu > li > a {
-    padding-left: 7px;
-}
-
-.page-sidebar-fixed.page-sidebar-closed ul.page-sidebar-menu > li > a {
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
-    transition: all 0.2s ease;
-}
-
-.page-sidebar-closed ul.page-sidebar-menu > li:hover {
-    width: 225px !important;
-    position: relative !important;
-    z-index: 2000;
-    display: block !important;
-}
-
-.page-sidebar-closed ul.page-sidebar-menu > li:hover .selected {
-    display: none;
-}
-
-.page-sidebar-closed ul.page-sidebar-menu > li:hover > a > i {
-    margin-right: 10px;
-}
-
-.page-sidebar-closed ul.page-sidebar-menu > li:hover .title {
-    display: inline !important;
-}
-
-.page-sidebar-closed ul.page-sidebar-menu > li > .sub-menu {
-    display: none !important;
-}
-
-.page-sidebar-closed ul.page-sidebar-menu > li:hover > .sub-menu {
-    width: 189px;
-    position: absolute;
-    z-index: 2000;
-    left: 36px;
-    margin-top: 0;
-    top: 100%;
-    display: block !important;
-}
-
-.page-sidebar-closed ul.page-sidebar-menu > li:hover > .sub-menu > li > .sub-menu,
-.page-sidebar-closed ul.page-sidebar-menu > li:hover > .sub-menu > li > .sub-menu > li > .sub-menu {
-    width: 189px;
-}
-
-/* 2rd level sub menu*/
-.page-sidebar-closed ul.page-sidebar-menu > li:hover > .sub-menu > li > a {
-    padding-left: 15px !important;
-}
-
-/* 3rd level sub menu*/
-.page-sidebar-closed ul.page-sidebar-menu > li > ul.sub-menu > li > .sub-menu > li > a {
-    padding-left: 30px !important;
-}
-
-/* 4rd level sub menu*/
-.page-sidebar-closed ul.page-sidebar-menu > li > ul.sub-menu > li > .sub-menu > li > .sub-menu > li > a {
-    padding-left: 45px !important;
-}
-
-/* sidebar container */
-
-.page-sidebar-closed  .page-sidebar {
-    width: 35px;
-}
-
-.page-sidebar-closed  .page-content {
-    margin-left: 35px !important;
 }

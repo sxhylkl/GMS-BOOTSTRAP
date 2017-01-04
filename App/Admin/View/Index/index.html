@@ -1,9 +1,9 @@
 <extend name="Public/base"/>
 <block name="body">
-    <!--<css href="Public/Admin/css/main.css"/>-->
-    <css href="Public/Static/Bootstrap/css/bootstrap-responsive.min.css"/>
-    <css href="Public/Static/Bootstrap/css/style-responsive.css"/>
-    <css href="Public/Static/Bootstrap/css/test.css"/>
+    <css href="Public/Admin/css/main.css"/>
+    <!--<css href="Public/Static/Bootstrap/css/bootstrap-responsive.min.css"/>-->
+    <!--<css href="Public/Static/Bootstrap/css/style-responsive.css"/>-->
+    <!--<css href="Public/Static/Bootstrap/css/test.css"/>-->
 
 
     <body>
@@ -83,38 +83,42 @@
     <div class="page-container">
         <!--左侧菜单-->
         <div class="page-sidebar">
-            <ul class="page-sidebar-menu ">
-                <volist name="AdminMenu" id="v">
-                    <li class="">
-                        <a href="#">{$v['title']}
-                            <span class="icon iconfont icon-jiantou-you"></span>
-                            <ul class="sub-menu">
-                                <volist  id="vo" name="v['children']">
-                                    <li class="">
+            <ul class="page-sidebar-menu list-group">
+                <foreach  name="Menu" item="menu">
+                    <li class="list-group-item">
+                        <a href="#">{$menu['title']}
+                            <if condition="$menu['type'] eq 1">
+                                <span class="icon iconfont icon-jiantou-you"></span>
+                            </if>
+                            <notempty name="menu['children']">
+                                <ul class="sub-menu">
+                                    <foreach name="menu['children']" item="sub_menu">
+                                        <li class="">
+                                            <a href="#">
+                                                <i class="icon iconfont {$sub_menu['icon']}"></i>
+                                                <span class="title">{$sub_menu['title']}</span>
+                                                <if condition="$menu['type'] eq 1">
+                                                    <span class="icon iconfont icon-jiantou-you"></span>
+                                                </if>
+                                            </a>
+                                            <notempty name="sub_menu['children']">
+                                                <ul class="sub-menu">
+                                                    <foreach name="sub_menu['children']" item="sub_menu_next">
+                                                        <li>
+                                                            <a href="#">{$sub_menu_next['title']}</a>
+                                                        </li>
+                                                    </foreach>
+                                                </ul>
+                                            </notempty>
+                                        </li>
+                                    </foreach>
+                                </ul>
+                            </notempty>
 
-                                        <a href="#">
-
-                                            <i class="icon-cogs"></i>
-
-                                            <span class="title">{$vo['title']}</span>
-
-                                            <span class="arrow "></span>
-
-                                        </a>
-
-                                        <ul class="sub-menu">
-                                            <volist id="vo2" name="vo['children']">
-                                                <li><a href="#">{$vo2['title']}</a></li>
-                                            </volist>
-                                        </ul>
-
-                                    </li>
-                            </volist>
-                            </ul>
                         </a>
 
                     </li>
-                </volist>
+                </foreach >
             </ul>
 
         </div>
