@@ -10,12 +10,14 @@
 }
 .page-container .page-content {
     margin-left: 225px;
+    height: 100%;
 }
 
 .page-container .page-sidebar {
-    background-color: #c5cbc7;
+    background-color: #dddddd;
     position: absolute;
     width: 225px;
+    height: 100%;
 }
 
 
