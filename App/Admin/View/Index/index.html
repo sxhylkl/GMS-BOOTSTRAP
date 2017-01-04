@@ -1,6 +1,11 @@
 <extend name="Public/base"/>
 <block name="body">
-    <css href="Public/Admin/css/main.css"/>
+    <!--<css href="Public/Admin/css/main.css"/>-->
+    <css href="Public/Static/Bootstrap/css/bootstrap-responsive.min.css"/>
+    <css href="Public/Static/Bootstrap/css/style-responsive.css"/>
+    <css href="Public/Static/Bootstrap/css/test.css"/>
+
+
     <body>
     <!--上部导航条-->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -78,11 +83,11 @@
     <div class="page-container">
         <!--左侧菜单-->
         <div class="page-sidebar">
-            <ul>
+            <ul class="page-sidebar-menu ">
                 <volist name="AdminMenu" id="v">
-                    <li>
+                    <li class="">
                         <a href="#">{$v['title']}
-                            <ul>
+                            <ul class="sub-menu">
                                 <volist  id="vo" name="v['children']">
                                     <li class="">
 
@@ -96,7 +101,7 @@
 
                                         </a>
 
-                                        <ul>
+                                        <ul class="sub-menu">
                                             <volist id="vo2" name="vo['children']">
                                                 <li><a href="#">{$vo2['title']}</a></li>
                                             </volist>
@@ -126,5 +131,10 @@
         <i class="icon iconfont icon-lock"></i>
     </div>
     <js href="Public/Admin/js/main.js"/>
+    <!--<js href="Public/Admin/js/app.js"/>-->
+    <script>
+        handleSidebarMenu();
+    </script>
+
     </body>
 </block>
