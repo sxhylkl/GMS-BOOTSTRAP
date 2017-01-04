@@ -36,13 +36,13 @@
                     <ul class="nav navbar-nav">
                         <!--<li class="active"><a href="#">Link</a></li>-->
                         <!--<li><a href="#">Link</a></li>-->
-                        <volist name="AdminMenu" id="v">
-                            <li>
-                                <a href="#" id="nav_{$v['id']}" menuType="{$v['menu_type']}" menuUrl="{:U($v['name'])}"
-                                   menuMC="{$v['name']}" menuTitle="{$v['title']}"
-                                   menuIcon="{$v['icon']}">{$v['title']}</a>
-                            </li>
-                        </volist>
+                        <!--<volist name="AdminMenu" id="v">-->
+                            <!--<li>-->
+                                <!--<a href="#" id="nav_{$v['id']}" menuType="{$v['menu_type']}" menuUrl="{:U($v['name'])}"-->
+                                   <!--menuMC="{$v['name']}" menuTitle="{$v['title']}"-->
+                                   <!--menuIcon="{$v['icon']}">{$v['title']}</a>-->
+                            <!--</li>-->
+                        <!--</volist>-->
 
                     </ul>
                     <!--导航右侧菜单项-->
@@ -78,7 +78,38 @@
     <div class="page-container">
         <!--左侧菜单-->
         <div class="page-sidebar">
-            sdfsdf
+            <ul>
+                <volist name="AdminMenu" id="v">
+                    <li>
+                        <a href="#">{$v['title']}
+                            <ul>
+                                <volist  id="vo" name="v['children']">
+                                    <li class="">
+
+                                        <a href="#">
+
+                                            <i class="icon-cogs"></i>
+
+                                            <span class="title">{$vo['title']}</span>
+
+                                            <span class="arrow "></span>
+
+                                        </a>
+
+                                        <ul>
+                                            <volist id="vo2" name="vo['children']">
+                                                <li><a href="#">{$vo2['title']}</a></li>
+                                            </volist>
+                                        </ul>
+
+                                    </li>
+                            </volist>
+                            </ul>
+                        </a>
+                    </li>
+                </volist>
+            </ul>
+
         </div>
         <!--右侧内容-->
         <div class="page-content embed-responsive embed-responsive-16by9">

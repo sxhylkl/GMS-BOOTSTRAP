@@ -19,19 +19,6 @@
     width: 225px;
     height: 100%;
 }
-
-
-.page-footer{
-    text-align: center;
-    background-color: #fff;
-    position: fixed;
-    left: 0;
-    right: 0;
-    z-index: 10000;
-    bottom: 0;
-    padding: 8px 20px 5px 20px;
-    font-size: 12px;
-}
 .scroll-to-top {
     display: inline-block;
     padding: 2px;
