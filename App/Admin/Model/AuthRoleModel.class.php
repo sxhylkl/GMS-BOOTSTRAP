@@ -12,7 +12,7 @@ namespace Admin\Model;
 
 use Think\Model;
 
-class AuthGroupModel extends Model
+class AuthRoleModel extends Model
 {
 
     /*模型中定义的表*/

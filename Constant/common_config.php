@@ -15,8 +15,8 @@ define('C_WEB_ROOT','http://'.$_SERVER["HTTP_HOST"]."/".APP_NAME);
 
 //配置默认数据库
 define("DB_CONFIG_NAME_GMS","DB_GMS");
-define('C_DB_HOST','localhost');
-define('C_DB_GMS','TobaccoGms1');
+define('C_DB_HOST','test.51zsqc.com');
+define('C_DB_GMS','Base_Gms');
 define('C_DB_GMS_USER','root');
 define('C_DB_GMS_PWD','tianxunceshi');
 

@@ -2,6 +2,7 @@
 <block name="body">
     <php>$bjsj=rand(1,4);</php>
     <css href="Public/Admin/css/login.css"/>
+    <css href="Public/Static/Bootstrap/css/bootstrapValidator.min.css"/>
     <!--随机背景图片-->
     <style>
         .bg {
@@ -17,39 +18,30 @@
         <div class="login_form">
             <form class="form-horizontal" role="form" method="post">
 
-
-                <div class="alert alert-error hide">
-
-                    <button class="close" data-dismiss="alert"></button>
-
-                    <span>Enter any username and password.</span>
-
-                </div>
-
                 <div class="form-group">
                     <label for="inpUser" class="col-sm-2 control-label">用户名</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control"
-                               id="inpUser" placeholder="用户名" name="username">
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="username"
+                               id="inpUser" placeholder="用户名" >
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inpPwd" class="col-sm-2 control-label">密码&nbsp</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <input type="password" class="form-control" id="inpPwd"
-                               placeholder="密码" name="password">
+                               name="password" placeholder="密码">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-3 col-sm-10">
-                        <button type="button" id="loginButton" class="btn btn-primary btn-lg btn-block">登录</button>
+                        <button type="submit" id="loginButton" class="btn btn-primary btn-lg btn-block">登录</button>
                     </div>
 
                 </div>
             </form>
         </div>
     </div>
-    <js href="Public/Static/Jquery/jquery.validate.min.js"/>
+    <js href="Public/Static/Bootstrap/js/bootstrapValidator.min.js"/>
     <js href="Public/Admin/js/login.js"/>
     </body>
 </block>

@@ -4,6 +4,7 @@ namespace Admin\Controller;
 
 use Admin\Model\UserModel;
 use Common\Controller\CoreController;
+use Think\Exception;
 
 class PublicController extends CoreController
 {
@@ -16,17 +17,13 @@ class PublicController extends CoreController
             if (IS_POST) {
                 $username = I("post.username", "", "trim");
                 $password = I("post.password", "", "trim");
-
-                if (empty ( $username ) || empty ( $password )) {
-                    $this->ajaxReturn(errorData('用户名或密码不能为空!'));
-                }
                 $userModel = new UserModel();
                 try {
                     $userModel->login($username, $password);
+                    echo json_encode(successData(U("Admin/Index/index")));
                 } catch (\Exception $e) {
-                    $this->ajaxReturn(errorData($e->getMessage()));
+                    echo json_encode(errorData($e->getMessage()));
                 }
-                $this->ajaxReturn(U("Admin/Index/index"));
             } else {
                 $this->display();
             }

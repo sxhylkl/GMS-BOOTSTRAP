@@ -72,9 +72,9 @@ class Auth{
     protected $_config = array(
         'AUTH_ON'           => true,                 // 认证开关
         'AUTH_TYPE'         => 1,                    // 认证方式，1为实时认证；2为登录认证。
-        'AUTH_GROUP'        => 'auth_group',        // 用户组数据表名
+        'AUTH_GROUP'        => 'auth_role',         // 角色数据表名
         'AUTH_RULE'         => 'auth_rule',         // 权限规则表
-        'AUTH_USER'         => 'member'             // 用户信息表
+        'AUTH_USER'         => 'user'             // 用户信息表
     );
 
     public function __construct() {
@@ -136,24 +136,24 @@ class Auth{
     }
 
     /**
-     * 根据用户id获取用户组,返回值为数组
+     * 根据用户id获取角色信息,返回值为数组
      * @param  uid int     用户id
      * @return array       用户所属的用户组 array(
      *     array('uid'=>'用户id','group_id'=>'用户组id','title'=>'用户组名称','rules'=>'用户组拥有的规则id,多个,号隔开'),
      *     ...)   
      */
-    public function getGroups($uid) {
+    public function getRoles($uid) {
         static $groups = array();
         if (isset($groups[$uid]))
             return $groups[$uid];
 			
-		$group_ids=M('User')->where(array('id'=>$uid))->getField('group_ids');
+		$group_ids=M()->table($this->_config['AUTH_USER'])->where(array('id'=>$uid))->getField('role_id');
 		if(!$group_ids){
 			return array();
 		}
-		$map['id']=$uid;
+
 		$map['status']=1;
-		$map['id']=array('in',$group_ids);
+		$map['id'] = $group_ids;
         $user_groups = M()
             ->table($this->_config['AUTH_GROUP'])
             ->where($map)
@@ -178,7 +178,7 @@ class Auth{
         }
 
         //读取用户所属用户组
-        $groups = $this->getGroups($uid);
+        $groups = $this->getRoles($uid);
         $ids = array();//保存用户所属用户组设置的所有权限规则id
         foreach ($groups as $g) {
             $ids = array_merge($ids, explode(',', trim($g['rules'], ',')));
@@ -195,7 +195,7 @@ class Auth{
             'status'=>1,
         );
         //读取用户组所有权限规则
-        $rules = M()->table($this->_config['AUTH_RULE'])->where($map)->field('condition,name')->select();
+        $rules = M()->table($this->_config['AUTH_RULE'])->where($map)->field('name')->select();
 
         //循环规则，判断结果。
         $authList = array();   //

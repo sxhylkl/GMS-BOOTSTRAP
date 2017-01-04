@@ -42,21 +42,21 @@ class UserModel extends Model{
     {
         $password = md5($password);
         if (empty ($username) || empty ($password)) {
-            new Exception("用户名密码不能为空");
+            throw new \Exception("用户名密码不能为空");
         }
         $map = array(
             'username' => trim($username),
             'password' => trim($password),
         );
         $UserInfo = $this->where($map)
-            ->field('id,username,head_img,auth_id,group_id,status,system_user')
+            ->field('id,username,head_img,role_id,group_id,status,system_user')
             ->find();
         if ($UserInfo) {
             if ("1" == $UserInfo['status']) {
 
-                $AG = new AuthGroupModel();
+                $AG = new AuthRoleModel();
 
-                $AG_Data = $AG->getAuthGroupInfo($UserInfo['auth_id']);
+                $AG_Data = $AG->getAuthGroupInfo($UserInfo['role_id']);
 
                 if ($AG_Data) {
                     $UserInfo['group_title'] = $AG_Data['title'];
@@ -64,12 +64,12 @@ class UserModel extends Model{
                 session(C('AUTH_KEY'), $UserInfo['id']);
                 session('UserInfo', $UserInfo);
                 action_log('Admin_Login', 'User', $UserInfo ['id']);
-                return $UserInfo;
+//                return $UserInfo;
             } else {
-                new Exception("用户被禁用");
+                throw new \Exception("用户被禁用");
             }
         } else {
-            new Exception("用户不存在或密码不正确");
+            throw new \Exception("用户不存在或密码不正确");
         }
     }
 

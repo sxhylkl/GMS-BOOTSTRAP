@@ -6,7 +6,6 @@
  * Time: 10:38
  */
 
-
 //define('C_DB_GPS','CourtGps');
 //define('C_DB_GPS_USER','root');
 //define('C_DB_GPS_PWD','');

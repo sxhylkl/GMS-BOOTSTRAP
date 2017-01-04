@@ -1,5 +1,5 @@
 <?php
-const APP_ADDON_PATH = './App/Addons/';
+//const APP_ADDON_PATH = './App/Addons/';
 /**
  * 检测用户是否登录
  * @return integer 0-未登录，大于0-当前登录用户ID

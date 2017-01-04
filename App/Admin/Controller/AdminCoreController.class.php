@@ -1,6 +1,7 @@
 <?php
 namespace Admin\Controller;
 use Common\Controller\CoreController;
+use Common\Libs\Auth;
 
 class AdminCoreController extends CoreController {
 	//后台核心继承
@@ -11,7 +12,12 @@ class AdminCoreController extends CoreController {
             //判断当前模块是否为非认证模块
             $Auth_Rule = MODULE_NAME . '/' . CONTROLLER_NAME . '/' . ACTION_NAME;
             if (!Is_Auth($Auth_Rule)) {
-                //$this->error ( '你没有权限进行 ' . $Auth_Rule . ' 操作！' );
+
+                //没有任何权限
+                //重定向到登出函数
+//                redirect(U('Admin/Public/logout'));
+//                //重定向到登录界面
+//                redirect(U(C('AUTH_USER_GATEWAY')));
             }
         }else{
             redirect(U(C('AUTH_USER_GATEWAY')));
@@ -32,9 +38,9 @@ class AdminCoreController extends CoreController {
 				);
 			} else {//如果认证key不存在超级管理组配置中,读取用户权限,根据权限获取用户组
 				//实例化Auth权限管理类
-				$Auth = new \Common\Libs\Auth();
+				$Auth = new Auth();
 				//获取当前用户 所在的所有组（即一个用户可以存在于多个用户组中）
-				$groups = $Auth->getGroups(session(C('AUTH_KEY')));
+				$groups = $Auth->getRoles(session(C('AUTH_KEY')));
 				$ids = array ();
 				if(count($groups)<1){
 					$this->error ( '你没有系统的任何权限！',U('Public/logout'));
