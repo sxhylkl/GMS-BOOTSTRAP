@@ -6,9 +6,9 @@
  * Time: 10:38
  */
 
-//define('C_DB_GPS','CourtGps');
-//define('C_DB_GPS_USER','root');
-//define('C_DB_GPS_PWD','');
+define('C_DB_GPS','base_gms');
+define('C_DB_GPS_USER','root');
+define('C_DB_GPS_PWD','');
 //
 //define('C_DB_KEDA_HOST','localhost');
 //define('C_DB_KEDA_USER','root');
