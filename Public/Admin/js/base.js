@@ -145,41 +145,6 @@ function Data_Remove(Data_from_url,Datagrid_data){
 	})
 }
 
-function Data_Ajax(Data_from_url,Datagrid_data,count){
-	if(count!=''){
-		$.messager.confirm('确定操作', count, function (flag) {
-			if (flag){
-				$.post(Data_from_url,{},function(res){
-					if(!res.status){
-						$.messager.show({title:'错误提示',msg:res.info,timeout:2000,showType:'slide'});
-					}else{
-						$.messager.show({title:'成功提示',msg:res.info,timeout:1000,showType:'slide'});
-						$('#'+Datagrid_data).datagrid('reload');
-						$('#'+Datagrid_data).treegrid('reload');
-					}
-				})
-			}
-		})
-	}else{
-		$.post(Data_from_url,{},function(res){
-			if(!res.status){
-				$.messager.show({title:'错误提示',msg:res.info,timeout:2000,showType:'slide'});
-			}else{
-				$.messager.show({title:'成功提示',msg:res.info,timeout:1000,showType:'slide'});
-				$('#'+Datagrid_data).datagrid('reload');
-				$('#'+Datagrid_data).treegrid('reload');
-			}
-		})
-	}
-}
-
-/* 刷新页面 */
-function Data_Reload(Data_Box){
-	$('#'+Data_Box).datagrid('reload');
-	$('#'+Data_Box).treegrid('reload');
-}
-
-
 
 KindEditor.ready(function(K) {});
 

@@ -1,15 +1,13 @@
-
 function handleSidebarMenu() {
-
     jQuery('.page-sidebar').on('click', 'li > a', function (e) {
-        if ($(this).next().hasClass('sub-menu') == false) {
-            if ($('.btn-navbar').hasClass('collapsed') == false) {
-                $('.btn-navbar').click();
+        handleSidebarSelect(jQuery(this));
+        if (jQuery(this).next().hasClass('sub-menu') == false) {
+            if (jQuery('.btn-navbar').hasClass('collapsed') == false) {
+                jQuery('.btn-navbar').click();
             }
             return;
         }
-
-        var parent = $(this).parent().parent();
+        var parent = jQuery(this).parent().parent();
 
         parent.children('li.open').children('a').children('.icon').removeClass('open');
         parent.children('li.open').children('.sub-menu').slideUp(200);
@@ -32,65 +30,137 @@ function handleSidebarMenu() {
 
         e.preventDefault();
     });
-
-    // handle ajax links
-    jQuery('.page-sidebar').on('click', ' li > a.ajaxify', function (e) {
-        e.preventDefault();
-        App.scrollTop();
-
-        var url = $(this).attr("href");
-        var menuContainer = jQuery('.page-sidebar ul');
-        var pageContent = $('.page-content');
-        var pageContentBody = $('.page-content .page-content-body');
-
-        menuContainer.children('li.active').removeClass('active');
-        menuContainer.children('arrow.open').removeClass('open');
-
-        $(this).parents('li').each(function () {
-            $(this).addClass('active');
-            $(this).children('a > span.arrow').addClass('open');
-        });
-        $(this).parents('li').addClass('active');
-
-        App.blockUI(pageContent, false);
-
-        $.post(url, {}, function (res) {
-            App.unblockUI(pageContent);
-            pageContentBody.html(res);
-            App.fixContentHeight(); // fix content height
-            App.initUniform(); // initialize uniform elements
-        });
-    });
 }
-
-
 function handleSidebarAndContentHeight() {
-    var content = $('.page-content');
-    var sidebar = $('.page-sidebar');
-    var body = $('body');
+    var content = jQuery('.page-content');
+    var sidebar = jQuery('.page-sidebar');
+    var body = jQuery('body');
     var height;
 
-    if (body.hasClass("page-footer-fixed") === true && body.hasClass("page-sidebar-fixed") === false) {
-        var available_height = $(window).height() - $('.footer').height();
-        if (content.height() <  available_height) {
-            content.attr('style', 'min-height:' + available_height + 'px !important');
-        }
+
+    height = sidebar.height() - 50;
+
+    if (height >= content.height()) {
+        content.attr('style', 'min-height:' + height + 'px !important');
+    }
+
+}
+
+
+function handleSidebarSelect(clickThis) {
+    // 1：菜单  2：节点
+    //当点击节点时进行操作
+    if ('2' == clickThis.attr('menuType')) {
+
+        var tableInfo = {
+            tabMainName:'mainTab',
+            tabName:clickThis[0].innerHTML.replace(/(^\s*)|(\s*jQuery)/g,''),
+            tabTitle:clickThis[0].innerHTML,
+            tabUrl:clickThis.attr('menuUrl')
+        };
+
+        console.log(clickThis[0].innerHTML.replace(/(^\s*)|(\s*jQuery)/g,''));
+        console.log(clickThis.attr('menuType'));
+        console.log(clickThis.attr('menuUrl'));
+        console.log(clickThis.attr('menuID'));
+
+        handleSelectTable(tableInfo)
+    }
+}
+/**
+ * 增加标签页
+ * option:
+     tabMainName:tab标签页所在的容器
+     tabName:当前tab的名称
+     tabTitle:当前tab的标题
+     tabUrl:当前tab所指向的URL地址
+ */
+function handleSelectTable(options) {
+
+    var exists = checkTabIsExists(options.tabMainName, options.tabName);
+    if (exists) {
+        jQuery("#tab_a_" + options.tabName).click();
     } else {
-        if (body.hasClass('page-sidebar-fixed')) {
-            height = _calculateFixedSidebarViewportHeight();
+        jQuery("#" + options.tabMainName).append('<li id="tab_li_' + options.tabName + '"><a href="#tab_content_' + options.tabName + '" data-toggle="tab" id="tab_a_' + options.tabName + '">' + options.tabTitle + '<span class="icon iconfont icon-jiantou-xia" onclick="closeTab(this);"></span></a></li>');
+        //固定TAB中IFRAME高度
+        mainHeight = jQuery(document.body).height() - 5;
+
+        var content = '';
+        if (options.content) {
+            content = option.content;
         } else {
-            height = sidebar.height()-50;
+            content = '<iframe src="' + options.tabUrl + '" width="100%" height="' + mainHeight + 'px" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="yes" allowtransparency="yes"></iframe>';
         }
-        if (height >= content.height()) {
-            content.attr('style', 'min-height:' + height + 'px !important');
-        }
-        //sidebar.attr('style','padding-top:50px!')
+        jQuery("#" + options.tabContentMainName).append('<div id="tab_content_' + options.tabName + '" role="tabpanel" class="tab-pane" id="' + options.tabName + '">' + content + '</div>');
+        jQuery("#tab_a_" + options.tabName).click();
     }
 }
-function _calculateFixedSidebarViewportHeight () {
-    var sidebarHeight = $(window).height() - $('.header').height() + 1;
-    if ($('body').hasClass("page-footer-fixed")) {
-        sidebarHeight = sidebarHeight - $('.footer').height();
+
+
+/**
+ * 关闭标签页
+ * @param button
+ */
+function closeTab(button) {
+
+    //通过该button找到对应li标签的id
+    var li_id = jQuery(button).parent().parent().attr('id');
+    var id = li_id.replace("tab_li_", "");
+
+    //如果关闭的是当前激活的TAB，激活他的前一个TAB
+    if (jQuery("li.active").attr('id') == li_id) {
+        jQuery("li.active").prev().find("a").click();
     }
-    return sidebarHeight;
+
+    //关闭TAB
+    jQuery("#" + li_id).remove();
+    jQuery("#tab_content_" + id).remove();
 }
+
+/**
+ * 判断是否存在指定的标签页
+ * @param tabMainName
+ * @param tabName
+ * @returns {Boolean}
+ */
+function checkTabIsExists(tabMainName, tabName) {
+    var tab = jQuery("#" + tabMainName + " > #tab_li_" + tabName);
+    //console.log(tab.length)
+    return tab.length > 0;
+}
+
+
+function Data_Ajax(Data_from_url, Datagrid_data, count) {
+    if (count != '') {
+        jQuery.messager.confirm('确定操作', count, function (flag) {
+            if (flag) {
+                jQuery.post(Data_from_url, {}, function (res) {
+                    if (!res.status) {
+                        jQuery.messager.show({title: '错误提示', msg: res.info, timeout: 2000, showType: 'slide'});
+                    } else {
+                        jQuery.messager.show({title: '成功提示', msg: res.info, timeout: 1000, showType: 'slide'});
+                        jQuery('#' + Datagrid_data).datagrid('reload');
+                        jQuery('#' + Datagrid_data).treegrid('reload');
+                    }
+                })
+            }
+        })
+    } else {
+        jQuery.post(Data_from_url, {}, function (res) {
+            if (!res.status) {
+                jQuery.messager.show({title: '错误提示', msg: res.info, timeout: 2000, showType: 'slide'});
+            } else {
+                jQuery.messager.show({title: '成功提示', msg: res.info, timeout: 1000, showType: 'slide'});
+                jQuery('#' + Datagrid_data).datagrid('reload');
+                jQuery('#' + Datagrid_data).treegrid('reload');
+            }
+        })
+    }
+}
+
+/* 刷新页面 */
+function Data_Reload(Data_Box) {
+    jQuery('#' + Data_Box).datagrid('reload');
+    jQuery('#' + Data_Box).treegrid('reload');
+}
+

@@ -8,7 +8,7 @@
 
     <body>
     <!--上部导航条-->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -86,26 +86,28 @@
             <ul class="page-sidebar-menu list-group">
                 <foreach  name="Menu" item="menu">
                     <li class="list-group-item">
-                        <a href="#">{$menu['title']}
+                        <a href="#" menuType="{$menu['type']}" menuUrl="{$menu['url']}" menuID="{$menu['id']}">{$menu['title']}
                             <if condition="$menu['type'] eq 1">
                                 <span class="icon iconfont icon-jiantou-you"></span>
                             </if>
                             <notempty name="menu['children']">
                                 <ul class="sub-menu">
-                                    <foreach name="menu['children']" item="sub_menu">
+                                    <foreach name="menu['children']" item="sub_menu1">
                                         <li class="">
-                                            <a href="#">
-                                                <i class="icon iconfont {$sub_menu['icon']}"></i>
-                                                <span class="title">{$sub_menu['title']}</span>
-                                                <if condition="$menu['type'] eq 1">
+                                            <a href="#" menuType="{$sub_menu1['type']}" menuUrl="{$sub_menu1['url']}" menuID="{$sub_menu1['id']}">
+                                                <i class="icon iconfont {$sub_menu1['icon']}"></i>
+                                                <span class="title">{$sub_menu1['title']}</span>
+                                                <if condition="$sub_menu1['type'] eq 1">
                                                     <span class="icon iconfont icon-jiantou-you"></span>
                                                 </if>
                                             </a>
-                                            <notempty name="sub_menu['children']">
+                                            <notempty name="sub_menu1['children']">
                                                 <ul class="sub-menu">
-                                                    <foreach name="sub_menu['children']" item="sub_menu_next">
+                                                    <foreach name="sub_menu1['children']" item="sub_menu2">
                                                         <li>
-                                                            <a href="#">{$sub_menu_next['title']}</a>
+                                                            <a href="#" menuType="{$sub_menu2['type']}" menuUrl="{$sub_menu2['url']}" menuID="{$sub_menu2['id']}">
+                                                                {$sub_menu2['title']}
+                                                            </a>
                                                         </li>
                                                     </foreach>
                                                 </ul>
@@ -123,9 +125,12 @@
 
         </div>
         <!--右侧内容-->
-        <div class="page-content embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item"></iframe>
-        </div>
+
+        <ul class="page-content nav nav-tabs" role="tablist" id="mainTab"></ul>
+
+        <!--<div class="page-content embed-responsive embed-responsive-16by9">-->
+            <!--<iframe class="embed-responsive-item"></iframe>-->
+        <!--</div>-->
 
     </div>
 
