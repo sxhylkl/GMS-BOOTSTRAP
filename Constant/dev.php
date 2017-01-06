@@ -7,7 +7,7 @@
  */
 
 define('C_DB_HOST','test.51zsqc.com');
-define('C_DB_GMS','TobaccoGms1');
+define('C_DB_GMS','Base_Gms');
 define('C_DB_GMS_USER','root');
 define('C_DB_GMS_PWD','tianxunceshi');
 

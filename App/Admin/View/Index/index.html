@@ -84,6 +84,9 @@
         <!--左侧菜单-->
         <div class="page-sidebar">
             <ul class="page-sidebar-menu list-group">
+                <li class="list-group-item">
+                    <!--<a href="#" menutype="2" menuurl="/GMS_Base/index.php?m=Service&c=SummaryMap&a=index" menuid="999">首页</a>-->
+                </li>
                 <foreach  name="Menu" item="menu">
                     <li class="list-group-item">
                         <a href="#" menuType="{$menu['type']}" menuUrl="{$menu['url']}" menuID="{$menu['id']}">{$menu['title']}
@@ -126,7 +129,23 @@
         </div>
         <!--右侧内容-->
 
-        <ul class="page-content nav nav-tabs" role="tablist" id="mainTab"></ul>
+        <div class="page-content">
+
+            <ul class="nav nav-tabs" role="tablist" id="mainTab">
+                <!--<li role="presentation" class="active"><a href="#home" role="tab" data-toggle="tab">Home</a>-->
+            </ul>
+
+            <div id="mainContent" class="tab-content"></div>
+
+        </div>
+
+
+
+        <!--<div class="page-content tab-content">-->
+            <!--<div role="tabpanel" class="tab-pane fade in active" id="home">-->
+                <!--<h1>欢迎使用</h1>-->
+            <!--</div>-->
+        <!--</div>-->
 
         <!--<div class="page-content embed-responsive embed-responsive-16by9">-->
             <!--<iframe class="embed-responsive-item"></iframe>-->

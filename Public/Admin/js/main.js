@@ -1,6 +1,6 @@
 function handleSidebarMenu() {
     jQuery('.page-sidebar').on('click', 'li > a', function (e) {
-        handleSidebarSelect(jQuery(this));
+        handleSidebarSelect($(this));
         if (jQuery(this).next().hasClass('sub-menu') == false) {
             if (jQuery('.btn-navbar').hasClass('collapsed') == false) {
                 jQuery('.btn-navbar').click();
@@ -53,13 +53,14 @@ function handleSidebarSelect(clickThis) {
     if ('2' == clickThis.attr('menuType')) {
 
         var tableInfo = {
-            tabMainName:'mainTab',
-            tabName:clickThis[0].innerHTML.replace(/(^\s*)|(\s*jQuery)/g,''),
-            tabTitle:clickThis[0].innerHTML,
-            tabUrl:clickThis.attr('menuUrl')
+            tabMainName: 'mainTab',
+            tabName: clickThis[0].innerHTML.replace(/(^\s*)|(\s*$)/g, ''),
+            tabTitle: clickThis[0].innerHTML,
+            tabUrl: clickThis.attr('menuUrl'),
+            tabContentMainName:'mainContent'
         };
 
-        console.log(clickThis[0].innerHTML.replace(/(^\s*)|(\s*jQuery)/g,''));
+        console.log(clickThis[0].innerHTML.replace(/(^\s*)|(\s*$)/g, ''));
         console.log(clickThis.attr('menuType'));
         console.log(clickThis.attr('menuUrl'));
         console.log(clickThis.attr('menuID'));
@@ -74,6 +75,7 @@ function handleSidebarSelect(clickThis) {
      tabName:当前tab的名称
      tabTitle:当前tab的标题
      tabUrl:当前tab所指向的URL地址
+     tabContentMainName:content所指向的contentID
  */
 function handleSelectTable(options) {
 
