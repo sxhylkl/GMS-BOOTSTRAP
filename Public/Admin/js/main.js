@@ -85,13 +85,13 @@ function handleSelectTable(options) {
     } else {
         jQuery("#" + options.tabMainName).append('<li id="tab_li_' + options.tabName + '"><a href="#tab_content_' + options.tabName + '" data-toggle="tab" id="tab_a_' + options.tabName + '">' + options.tabTitle + '<span class="icon iconfont icon-jiantou-xia" onclick="closeTab(this);"></span></a></li>');
         //固定TAB中IFRAME高度
-        mainHeight = jQuery(document.body).height() - 5;
+        // mainHeight = jQuery(document.body).height() - 5;
 
         var content = '';
         if (options.content) {
             content = option.content;
         } else {
-            content = '<iframe src="' + options.tabUrl + '" width="100%" height="' + mainHeight + 'px" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="yes" allowtransparency="yes"></iframe>';
+            content = '<iframe src="' + options.tabUrl + '" width="100%" height="100%" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes"></iframe>';
         }
         jQuery("#" + options.tabContentMainName).append('<div id="tab_content_' + options.tabName + '" role="tabpanel" class="tab-pane" id="' + options.tabName + '">' + content + '</div>');
         jQuery("#tab_a_" + options.tabName).click();
