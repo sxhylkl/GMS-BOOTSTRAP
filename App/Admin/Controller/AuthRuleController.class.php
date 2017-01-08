@@ -39,7 +39,7 @@ class AuthRuleController extends AdminCoreController {
 			$this->ajaxReturn ( $data );
 		}else{
         	//如果是get请求，显示页面模版
-        	$this->display();
+        	$this->display('index2');
 		}
 	}
 	

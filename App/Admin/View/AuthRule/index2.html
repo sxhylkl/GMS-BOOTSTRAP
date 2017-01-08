@@ -1,0 +1,55 @@
+<extend name="Public/base"/>
+<block name="body">
+
+
+    <div class="row">
+
+        <!--上方工具条-->
+        <div class="col-md-12">
+            <div class="row" style="height: 50px;padding-top: 10px">
+                <div class="col-xs-12 col-sm-6 col-md-8">
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">查询</button>
+                                    </span>
+                            </div><!-- /input-group -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-4" style="text-align: right">
+
+                    <div class="btn-toolbar btn-group" role="toolbar">
+                        <button type="button" class="btn btn-default">添加</button>
+                        <button type="button" class="btn btn-default">修改</button>
+                        <button type="button" class="btn btn-default">删除</button>
+                        <button type="button" class="btn btn-default">查询</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!--下方内容呈现-->
+        <div class="col-md-12">
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped"
+                       id="table"
+                       data-toggle="table"
+                       data-url="/gh/get/response.json/wenzhixin/bootstrap-table/tree/master/docs/data/data1/"
+                       data-height="200">
+                    <tr>
+                        <th data-field="name">Name</th>
+                        <th data-field="stargazers_count">Stars</th>
+                        <th data-field="forks_count">Forks</th>
+                        <th data-field="description">Description</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</block>
