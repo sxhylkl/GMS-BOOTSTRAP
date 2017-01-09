@@ -13,6 +13,17 @@
         .sidebar-panel{
             padding: 10px 0 2px 15px;
         }
+        .middle{
+
+            position: absolute!important;
+            /*top:60px!important;*/
+            padding-top: 60px;
+            height:100%;
+            width:100%;
+            background:#ffc;
+            text-align:center;
+            /*overflow: auto;*/
+        }
     </style>
     <body>
     <!--上方浮动标题-->
@@ -86,11 +97,10 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-    <div class="container-fluid" style="padding-top: 60px">
-        <div class="row">
+    <div class="container" style="position:fixed;width:100%;left:0; padding:50px 0 30px 0;height:100%;overflow: auto">
+
             <!--主题内容-->
-            <div class="col-sm-12">
-                <div class="row">
+        <div class="row" style="height: 100%">
 
                     <!--左侧菜单-->
                     <div class="col-sm-2 sidebar">
@@ -168,15 +178,14 @@
                     </div>
 
                 </div>
-            </div>
-            <!--版权信息-->
-            <div class="col-md-12">
-                <div style="text-align: center">
-                    <span>Powered by {:C('SOFT_NAME')} | Copyright © All rights reserved.</span>
-                </div>
-            </div>
+    </div>
+    <!--版权信息-->
+    <div style="height:30px;bottom:0; background:gray;position:fixed; width:100%;left:0; z-index:20;">
+        <div style="text-align: center">
+            <span>Powered by {:C('SOFT_NAME')} | Copyright © All rights reserved.</span>
         </div>
     </div>
+
     <!--<js href="Public/Admin/js/main.js"/>-->
     <!--<js href="Public/Admin/js/app.js"/>-->
 
