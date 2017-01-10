@@ -358,15 +358,15 @@
         searchText: '',
         iconSize: undefined,
         buttonsClass: 'default',
-        iconsPrefix: 'glyphicon', // glyphicon of fa (font awesome)
+        iconsPrefix: 'icon iconfont', // glyphicon of fa (font awesome)
         icons: {
-            paginationSwitchDown: 'glyphicon-collapse-down icon-chevron-down',
-            paginationSwitchUp: 'glyphicon-collapse-up icon-chevron-up',
-            refresh: 'glyphicon-refresh icon-refresh',
-            toggle: 'glyphicon-list-alt icon-list-alt',
-            columns: 'glyphicon-th icon-th',
-            detailOpen: 'glyphicon-plus icon-plus',
-            detailClose: 'glyphicon-minus icon-minus'
+            paginationSwitchDown: 'icon-collapse-xia',
+            paginationSwitchUp: 'icon-collapse-shang',
+            refresh: 'icon-refresh',
+            toggle: 'icon-Toggle',
+            columns: 'icon-Columns',
+            detailOpen: 'icon-icon_plus',
+            detailClose: 'icon-iconminus'
         },
 
         customSearch: $.noop,
