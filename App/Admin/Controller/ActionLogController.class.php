@@ -35,7 +35,7 @@ class ActionLogController extends AdminCoreController {
 
 
 
-            $map = $this->_search();
+//            $map = $this->_search();
 
 
         	$map['status'] = array('gt',-1);

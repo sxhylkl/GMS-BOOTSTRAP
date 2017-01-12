@@ -14,7 +14,7 @@ class IndexController extends AdminCoreController {
     public function index(){
 //        dump($this->get_menu());
 		$this->assign ( 'Menu', $this->get_menu());
-		$this->display ('index2');
+		$this->display ('index');
     }
 	
     /**

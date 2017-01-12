@@ -365,7 +365,7 @@ class ModelController extends AdminCoreController {
 			$content = $this->fetch ( 'build_index' . $this->ModelInfo ['list_type'] );
 		}
 		//将上一步解析的模版文件存至 文件
-		file_put_contents ( $path . 'index.html', '<extend name="Public/base"/><block name="body">'.$content.'</block>' );
+		file_put_contents ( $path . 'back.html', '<extend name="Public/base"/><block name="body">'.$content.'</block>' );
 	}
 	
 	/**

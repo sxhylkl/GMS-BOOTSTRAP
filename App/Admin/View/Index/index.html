@@ -1,165 +1,157 @@
+<block name="extend_css">
+    <css href="Public/Admin/css/main.css"/>
+</block>
 <extend name="Public/base"/>
 <block name="body">
-    <css href="Public/Admin/css/main.css"/>
     <body>
-    <!--上部导航条-->
+    <!--上方浮动标题-->
     <nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
 
-                    <!--图标-->
-                    <!--<a style="font-size:25px;" >-->
-                    <a class="navbar-brand" href="{:U('Admin/Index/index')}">
-                        <span class="icon iconfont icon-lock"></span>
-                        <!--<img alt="Brand" src="/favicon.ico" >-->
-                        <!--软件名称-->
-                        {:C('SOFT_NAME')}
-                    </a>
+                <!--图标-->
+                <!--<a style="font-size:25px;" >-->
+                <a class="navbar-brand" href="{:U('Admin/Index/index')}">
+                    <span class="icon iconfont icon-lock"></span>
+                    <!--<img alt="Brand" src="/favicon.ico" >-->
+                    <!--软件名称-->
+                    {:C('SOFT_NAME')}
+                </a>
 
-                    <!--响应界面变形后菜单样式-->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                            data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <!--<a class="navbar-brand">首页</a>-->
-                </div>
+                <!--响应界面变形后菜单样式-->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!--<a class="navbar-brand">首页</a>-->
+            </div>
 
-                <!--菜单内容-->
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <!--菜单内容-->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-                    <!--导航左侧菜单项-->
-                    <ul class="nav navbar-nav">
-                        <!--<li class="active"><a href="#">Link</a></li>-->
-                        <!--<li><a href="#">Link</a></li>-->
-                        <!--<volist name="AdminMenu" id="v">-->
-                            <!--<li>-->
-                                <!--<a href="#" id="nav_{$v['id']}" menuType="{$v['menu_type']}" menuUrl="{:U($v['name'])}"-->
-                                   <!--menuMC="{$v['name']}" menuTitle="{$v['title']}"-->
-                                   <!--menuIcon="{$v['icon']}">{$v['title']}</a>-->
-                            <!--</li>-->
-                        <!--</volist>-->
+                <!--导航左侧菜单项-->
+                <ul class="nav navbar-nav">
+                    <!--<li class="active"><a href="#">Link</a></li>-->
+                    <!--<li><a href="#">Link</a></li>-->
+                    <!--<volist name="AdminMenu" id="v">-->
+                    <!--<li>-->
+                    <!--<a href="#" id="nav_{$v['id']}" menuType="{$v['menu_type']}" menuUrl="{:U($v['name'])}"-->
+                    <!--menuMC="{$v['name']}" menuTitle="{$v['title']}"-->
+                    <!--menuIcon="{$v['icon']}">{$v['title']}</a>-->
+                    <!--</li>-->
+                    <!--</volist>-->
 
-                    </ul>
-                    <!--导航右侧菜单项-->
-                    <ul class="nav navbar-nav navbar-right">
+                </ul>
+                <!--导航右侧菜单项-->
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" id="userinfo">
+                            <span style="width: 40px" class="icon iconfont icon-user"></span>
+                            {$UserInfo['group_title']}[{$UserInfo['username']}]</a>
+                    </li>
+                    <if condition="Is_Auth_Check('Manager/Setting/setting')">
                         <li>
-                            <a href="#" id="userinfo">
-                                <span style="width: 40px" class="icon iconfont icon-user"></span>
-                                {$UserInfo['group_title']}[{$UserInfo['username']}]</a>
+                            <a id="setting" href="JavaScript:void(0);">设置</a>
                         </li>
-                        <if condition="Is_Auth_Check('Manager/Setting/setting')">
-                            <li>
-                                <a id="setting" href="JavaScript:void(0);">设置</a>
-                            </li>
-                        </if>
-                        <if condition="Is_Auth_Check('Manager/Setting/generateLogs')">
-                            <li>
-                                <a href="{:U('Gps/Index/generateLogs')}" target="_blank">导出日志</a>
-                            </li>
-                        </if>
-
+                    </if>
+                    <if condition="Is_Auth_Check('Manager/Setting/generateLogs')">
                         <li>
-                            <a href="./Public/Manager/keda/bin/BS-Setup.exe" target="_blank">插件下载</a>
+                            <a href="{:U('Gps/Index/generateLogs')}" target="_blank">导出日志</a>
                         </li>
-                        <li>
-                            <a href="{:U('Public/logout')}">退出</a>
-                        </li>
-                    </ul>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-        </nav>
+                    </if>
 
-    <!--中部内容-->
-    <div class="page-container">
-        <!--左侧菜单-->
-        <div class="page-sidebar">
-            <ul class="page-sidebar-menu list-group">
-                <li class="list-group-item">
-                    <!--<a href="#" menutype="2" menuurl="/GMS_Base/index.php?m=Service&c=SummaryMap&a=index" menuid="999">首页</a>-->
-                </li>
-                <foreach  name="Menu" item="menu">
-                    <li class="list-group-item">
-                        <a href="#" menuType="{$menu['type']}" menuUrl="{$menu['url']}" menuID="{$menu['id']}">{$menu['title']}
-                            <if condition="$menu['type'] eq 1">
-                                <span class="icon iconfont icon-jiantou-you"></span>
-                            </if>
-                            <notempty name="menu['children']">
-                                <ul class="sub-menu">
-                                    <foreach name="menu['children']" item="sub_menu1">
-                                        <li class="">
-                                            <a href="#" menuType="{$sub_menu1['type']}" menuUrl="{$sub_menu1['url']}" menuID="{$sub_menu1['id']}">
-                                                <i class="icon iconfont {$sub_menu1['icon']}"></i>
-                                                <span class="title">{$sub_menu1['title']}</span>
-                                                <if condition="$sub_menu1['type'] eq 1">
-                                                    <span class="icon iconfont icon-jiantou-you"></span>
-                                                </if>
-                                            </a>
-                                            <notempty name="sub_menu1['children']">
-                                                <ul class="sub-menu">
-                                                    <foreach name="sub_menu1['children']" item="sub_menu2">
-                                                        <li>
-                                                            <a href="#" menuType="{$sub_menu2['type']}" menuUrl="{$sub_menu2['url']}" menuID="{$sub_menu2['id']}">
-                                                                {$sub_menu2['title']}
+                    <li>
+                        <a href="./Public/Manager/keda/bin/BS-Setup.exe" target="_blank">插件下载</a>
+                    </li>
+                    <li>
+                        <a href="{:U('Public/logout')}">退出</a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="container panel-main-content">
+            <!--主题内容-->
+        <div class="row" style="height: 100%">
+                    <!--左侧菜单-->
+                    <div class="col-sm-2 sidebar">
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <ul class="list-group">
+                                <foreach name="Menu" item="menu">
+                                    <div class="list-group-item" role="tab" id="head_{$menu['id']}">
+                                        <a data-toggle="collapse" data-parent="#accordion" menuTitle="{$menu['title']}" menuType="{$menu['type']}" menuHis="{$menu['title']}" menuUrl="{$menu['url']}"
+                                           href="#collapse_{$menu['id']}" aria-expanded="false" aria-controls="collapse_{$menu['id']}">
+                                            <i class="icon iconfont {$menu['icon']}"></i>
+                                            <span>{$menu['title']}</span>
+                                            <if condition="$menu['type'] eq 1">
+                                                <i class="icon iconfont icon-jiantou-you" style="float: right"></i>
+                                            </if>
+                                        </a>
+                                        <notempty name="menu['children']">
+                                            <div id="collapse_{$menu['id']}" class="panel-collapse collapse"
+                                                 role="tabpanel" aria-labelledby="head_{$menu['id']}">
+                                                <ul class="panel-heading list-unstyled sidebar-panel" id="sub_acc"
+                                                    role="tablist" aria-multiselectable="true">
+                                                    <foreach name="menu['children']" item="sub_menu1">
+
+                                                        <div role="tab" id="sub_head_{$sub_menu1['id']}">
+                                                            <a data-toggle="collapse" data-parent="#sub_acc" menuTitle="{$sub_menu1['title']}" menuType="{$sub_menu1['type']}" menuHis="{$menu['title']},{$sub_menu1['title']}" menuUrl="{$sub_menu1['url']}"
+                                                               href="#sub_collapse_{$sub_menu1['id']}" aria-expanded="false" aria-controls="sub_collapse_{$sub_menu1['id']}">
+                                                                <i class="icon iconfont {$sub_menu1['icon']}"></i>
+                                                                <span>{$sub_menu1['title']}</span>
+                                                                <if condition="$sub_menu1['type'] eq 1">
+                                                                    <i class="icon iconfont icon-jiantou-you" style="float: right"></i>
+                                                                </if>
+                                                                <br>
+                                                                <notempty name="sub_menu1['children']">
+                                                                    <div id="sub_collapse_{$sub_menu1['id']}"
+                                                                         class="panel-collapse collapse"
+                                                                         role="tabpanel">
+                                                                        <div class="panel-heading sidebar-panel">
+                                                                            <foreach name="sub_menu1['children']" item="sub_menu2">
+                                                                                <a href="#" menuTitle="{$sub_menu2['title']}" menuType="{$sub_menu2['type']}" menuHis="{$menu['title']},{$sub_menu1['title']},{$sub_menu2['title']}" menuUrl="{$sub_menu2['url']}">{$sub_menu2['title']}</a><br>
+                                                                            </foreach>
+                                                                        </div>
+                                                                    </div>
+                                                                </notempty>
                                                             </a>
-                                                        </li>
+                                                        </div>
+
                                                     </foreach>
                                                 </ul>
-                                            </notempty>
-                                        </li>
-                                    </foreach>
-                                </ul>
-                            </notempty>
+                                            </div>
+                                        </notempty>
+                                    </div>
+                                </foreach>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--右侧内容-->
+                    <div class="col-sm-10 content">
+                        <div class="panel  panel-info content-panel">
+                            <!--右侧内容头部-->
+                            <div class="panel-heading breadcrumb" style="margin-bottom: 0"></div>
+                            <!--右侧内容正文-->
+                            <div class="panel-body" style="height: 90%">
+                                <iframe id="main-content" style="height: 100%;width: 100%;border: 0;" scrolling="no" allowtransparency="yes"></iframe>
+                            </div>
+                        </div>
+                    </div>
 
-                        </a>
-
-                    </li>
-                </foreach >
-            </ul>
-
-        </div>
-        <!--右侧内容-->
-
-        <div class="page-content">
-
-            <ul class="nav nav-tabs" role="tablist" id="mainTab">
-                <!--<li role="presentation" class="active"><a href="#home" role="tab" data-toggle="tab">Home</a>-->
-            </ul>
-
-            <div id="mainContent" class="tab-content embed-responsive embed-responsive-16by9"></div>
-
-        </div>
-
-
-
-        <!--<div class="page-content tab-content">-->
-            <!--<div role="tabpanel" class="tab-pane fade in active" id="home">-->
-                <!--<h1>欢迎使用</h1>-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="page-content embed-responsive embed-responsive-16by9">-->
-            <!--<iframe class="embed-responsive-item"></iframe>-->
-        <!--</div>-->
-
+                </div>
+    </div>
+    <!--版权信息-->
+    <div class="panel-main-footer">
+        <span>Powered by {:C('SOFT_NAME')} | Copyright © All rights reserved.</span>
     </div>
 
-    <!--底部版权-->
-    <!--<div class="page-footer">-->
-        <!--<span>Powered by {:C('SOFT_NAME')} | Copyright © All rights reserved.</span>-->
-    <!--</div>-->
-    <div class="scroll-to-top" style="display: none;">
-        <i class="icon iconfont icon-lock"></i>
-    </div>
     <js href="Public/Admin/js/main.js"/>
     <!--<js href="Public/Admin/js/app.js"/>-->
-    <script>
-        handleSidebarMenu();
-    </script>
 
     </body>
 </block>
