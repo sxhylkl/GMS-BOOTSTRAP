@@ -816,33 +816,31 @@ function currentDate($time = 0)
     return date("Y-m-d H:i:s", $time ? $time : time());
 }
 
-function parseToIndex($array, $indexName, $deleteIndex = false)
-{
-    $newArray = array();
-    foreach ($array as $item) {
-        $key = $item[$indexName];
-        if ($deleteIndex) {
-            unset($item[$indexName]);
-        }
-        $newArray[$key] = $item;
-    }
-    return $newArray;
-}
 
-function p($data)
+function successData($data)
 {
-    echo "<pre>";
-    print_r($data);
-}
-function successData($data){
     $res['Code'] = 200;
     $res['Data'] = $data;
     return $res;
-//    echo json_encode($res);
 }
-function errorData($msg){
+
+function errorData($msg)
+{
     $res['Code'] = 400;
     $res['Msg'] = $msg;
     return $res;
-//    echo json_encode($res);
+}
+
+function fromData($total, $list)
+{
+    $data = array(
+        'total' => $total == 0 ? 0 : $total,
+        'rows' => $list == array() ? array() : $list
+    );
+    return $data;
+}
+
+function getUserInfo()
+{
+    return session('UserInfo');
 }

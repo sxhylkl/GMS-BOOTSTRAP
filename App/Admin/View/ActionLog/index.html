@@ -30,6 +30,7 @@
         </div>
     </div>
     <script type="text/javascript">
+
         var log_info_url = "{:U('edit')}&id=";
 
         $(function () {
@@ -122,7 +123,6 @@
 
             $('#ActionLog_Data_List').datagrid('reload');
         }
-
 
         function viewinfo(id) {
             $('#view_dialog').window('refresh', log_info_url + id);

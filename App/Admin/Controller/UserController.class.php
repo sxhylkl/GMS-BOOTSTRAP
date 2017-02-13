@@ -1,121 +1,23 @@
 <?php 
 /*
  * 用户控制器
- * Auth   : Ghj
- * Time   : 2016年01月10日 
- * QQ     : 912524639
- * Email  : 912524639@qq.com
- * Site   : http://guanblog.sinaapp.com/
+ * Auth   : li
+ * QQ     : 184117183
+ * Email  : 184117183@qq.com
  */
  
 namespace Admin\Controller;
 
-
-use Think\Log;
+use Admin\Model\UserModel;
 
 class UserController extends AdminCoreController {
 	
 	//系统默认模型
-	private $Model = null;
-
     protected function _initialize() {
 		//继承初始化方法
 		parent::_initialize ();
-		//设置控制器默认模型
-        $this->Model = D('User');
+        $this->Model = new UserModel();
     }
-	
-    /* 列表(默认首页)
-     * Auth   : Ghj
-     * Time   : 2016年01月10日 
-     **/
-	public function index(){
-		if (IS_POST) {
-			$post_data = I ( 'post.' );
-			$post_data ['first'] = $post_data ['rows'] * ($post_data ['page'] - 1);
-//			$map = array ();
-            $map = $this->_search();
-
-            $accout_state = $this->UserInfo['system_user'];
-            if($accout_state > 0){
-                $map ['system_user'] = 1;
-
-                $map['_logic'] = "and";
-
-            }
-            else{
-                $map ['system_user'] = array('in',"1,0");
-            }
-
-
-
-			$dao = M('user_group_view');
-        	$map['status']= array('gt',-1);
-			$total = $dao->where ( $map )->count ();
-			if ($total == 0) {
-				$_list = '';
-			} else {
-				$_list = $dao->where ( $map )->order ( $post_data ['sort'] . ' ' . $post_data ['order'] )->limit ( $post_data ['first'] . ',' . $post_data ['rows'] )->select ();
-			}
-			$data = array (
-					'total' => $total,
-					'rows' => $_list 
-			);
-			$this->ajaxReturn ( $data );
-		}
-		else {
-			$this->display ();
-		}
-	}
-	
-    /* 搜索
-     * Auth   : Ghj
-     * Time   : 2016年01月10日 
-     **/
-	protected function _search() {
-		$map = array ();
-		$post_data=I('post.');
-		/* 名称：用户名 字段：username 类型：string*/
-		if(isset($post_data['s_username']) && $post_data['s_username']!=''){
-			$map['id']=array('in', $post_data['s_username']);
-		}
-//		/* 名称：昵称/姓名 字段：nickname 类型：string*/
-//		if($post_data['s_nickname']!=''){
-//			$map['nickname']=array('like', '%'.$post_data['s_nickname'].'%');
-//		}
-//		/* 名称：邮箱 字段：email 类型：string*/
-//		if($post_data['s_email']!=''){
-//			$map['email']=array('like', '%'.$post_data['s_email'].'%');
-//		}
-//		/* 名称：余额 字段：amount 类型：num*/
-//		if($post_data['s_amount']!=''){
-//			$map['amount']=$post_data['s_amount'];
-//		}
-//		/* 名称：积分 字段：point 类型：num*/
-//		if($post_data['s_point']!=''){
-//			$map['point']=$post_data['s_point'];
-//		}
-//		/* 名称：创建时间 字段：create_time 类型：datetime*/
-//		if($post_data['s_create_time_min']!=''){
-//			$map['create_time'][]=array('gt',strtotime($post_data['s_create_time_min']));
-//		}
-//		if($post_data['s_create_time_max']!=''){
-//			$map['create_time'][]=array('lt',strtotime($post_data['s_create_time_max']));
-//		}
-//		/* 名称：更新时间 字段：update_time 类型：datetime*/
-//		if($post_data['s_update_time_min']!=''){
-//			$map['update_time'][]=array('gt',strtotime($post_data['s_update_time_min']));
-//		}
-//		if($post_data['s_update_time_max']!=''){
-//			$map['update_time'][]=array('lt',strtotime($post_data['s_update_time_max']));
-//		}
-//		/* 名称：状态 字段：status 类型：select*/
-//		if($post_data['s_status']!=''){
-//			$map['status']=$post_data['s_status'];
-//		}
-		return $map;
-	}
-
 
     /**
      * 图片上传文件名称处理
@@ -291,26 +193,6 @@ class UserController extends AdminCoreController {
 
 	}
 
-//
-//    /* 角色组
-//     * Auth   : Ghj
-//     * Time   : 2016年01月10日
-//     **/
-//	public function group(){
-//		if(IS_POST){
-//			$post_data=I('post.');
-//			$group_ids=I('post.group_ids');
-//			$_data['group_ids']=implode(',',$group_ids);
-//			$this->Model->where(array('id'=>$post_data['id']))->save($_data);
-//			$this->success ( "操作成功！",U('index'));
-//		}else{
-//			$_info=I('get.');
-//			$_group_ids = $this->Model->where(array('id'=>$_info['id']))->getField('group_ids');
-//			$this->assign('_info', $_info);
-//			$this->assign('_group_id', $_group_ids);
-//        	$this->display();
-//		}
-//	}
 	
     /* 删除
      * Auth   : Ghj

@@ -1,18 +1,15 @@
-<?php 
+<?php
 /*
  * 用户管理模型
- * Auth   : Ghj
- * Time   : 1444386899 
- * QQ     : 912524639
- * Email  : 912524639@qq.com
- * Site   : http://guanblog.sinaapp.com/
+ * Auth   : li
+ * QQ     : 184117183
+ * Email  : 184117183@qq.com
  */
- 
-namespace Admin\Model;
-use Exception;
-use Think\Model;
 
-class UserModel extends Model{
+namespace Admin\Model;
+
+class UserModel extends AdminCoreModel
+{
 
     //array(验证字段,验证规则,错误提示,[验证条件,附加规则,验证时间])
     protected $_validate = array(
@@ -28,7 +25,25 @@ class UserModel extends Model{
         array('create_time', 'time', 1, 'function'),
         array('update_time', 'time', 3, 'function'),
         array('password', 'md5', 3, 'function'),
+        array('system_user', '0', 3),
     );
+
+    protected function searchFields()
+    {
+        return 'id';
+    }
+
+
+    protected function search()
+    {
+        $map = array();
+        $post_data = I('post.');
+        /* 名称：用户名 字段：username 类型：string*/
+        if (isset($post_data['s_username']) && $post_data['s_username'] != '') {
+            $map['id'] = array('in', $post_data['s_username']);
+        }
+        return $map;
+    }
 
 
     /**
@@ -72,5 +87,6 @@ class UserModel extends Model{
             throw new \Exception("用户不存在或密码不正确");
         }
     }
+
 
 }
