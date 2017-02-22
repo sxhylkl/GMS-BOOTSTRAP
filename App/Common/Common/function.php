@@ -817,6 +817,12 @@ function currentDate($time = 0)
 }
 
 
+function getStatus()
+{
+    return array('启用', '禁用');
+}
+
+
 function successData($data)
 {
     $res['Code'] = 200;

@@ -10,13 +10,8 @@
 
 namespace Admin\Model;
 
-use Think\Model;
-
-class AuthRoleModel extends Model
+class RoleModel extends AdminCoreModel
 {
-
-    /*模型中定义的表*/
-    protected $tableName = '';
 
     /* 自动验证规则 */
     protected $_validate = array(
@@ -26,32 +21,26 @@ class AuthRoleModel extends Model
         array('status', array(0, 1), '状态错误，状态只能是1或者0！', 2, 'in'),
     );
 
-    /* 自动完成规则 */
-    protected $_auto = array(
-
-        array('editable', '1'),
-        array('visible', '1'),
-        array('comment', '自动添加字段测试')
-
-
-    );
-
-
-    public function getAuthGroupInfo($groupID)
+    public function getRoleName($id)
     {
+        if (!$id) {
+            return '参数错误!';
+        }
+        return $this->where(array('id' => $id))->getField('title');
+    }
 
-        if (!$groupID) {
+
+    public function getRoleRule($id)
+    {
+        if (!$id) {
             return errorData('参数错误!');
         }
-
         try {
-            $res = $this->where(array('id' => $groupID))->find();
+            $res = $this->where(array('id' => $id))->find();
             return successData($res);
         } catch (\Exception $e) {
             return errorData($e->getMessage());
         }
-
-
     }
 
 }

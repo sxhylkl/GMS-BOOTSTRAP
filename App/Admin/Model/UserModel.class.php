@@ -30,7 +30,16 @@ class UserModel extends AdminCoreModel
 
     protected function searchFields()
     {
-        return 'id';
+        return 'id,username,role_id,group_id,phone,email,status,remark';
+    }
+
+    protected function formatData($lists)
+    {
+        foreach ($lists as $k => $list) {
+            $lists[$k]['status'] = getStatus()[$list['status']];
+            $lists[$k]['role_id'] = (new RoleModel())->getRoleName($list['role_id']);
+        }
+        return $lists;
     }
 
 
@@ -55,10 +64,11 @@ class UserModel extends AdminCoreModel
      */
     public function login($username, $password)
     {
-        $password = md5($password);
+
         if (empty ($username) || empty ($password)) {
             throw new \Exception("用户名密码不能为空");
         }
+        $password = md5($password);
         $map = array(
             'username' => trim($username),
             'password' => trim($password),
@@ -67,19 +77,17 @@ class UserModel extends AdminCoreModel
             ->field('id,username,head_img,role_id,group_id,status,system_user')
             ->find();
         if ($UserInfo) {
-            if ("1" == $UserInfo['status']) {
-
-                $AG = new AuthRoleModel();
-
-                $AG_Data = $AG->getAuthGroupInfo($UserInfo['role_id']);
-
-                if ($AG_Data) {
-                    $UserInfo['group_title'] = $AG_Data['title'];
-                }
+            if ("0" == $UserInfo['status']) {
+//                $role = new RoleModel();
+//
+//                $roleData = $role->getRoleRule($UserInfo['role_id']);
+//
+//                if ($roleData) {
+//                    $UserInfo['user_role'] = $roleData['title'];
+//                }
                 session(C('AUTH_KEY'), $UserInfo['id']);
                 session('UserInfo', $UserInfo);
                 action_log('Admin_Login', 'User', $UserInfo ['id']);
-//                return $UserInfo;
             } else {
                 throw new \Exception("用户被禁用");
             }

@@ -1,265 +1,272 @@
 <block name="extend_css">
-	<link rel="stylesheet" type="text/css" href="__STATIC__/Bootstrap/css/bootstrap-table.min.css">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Bootstrap/css/bootstrap-table.min.css">
 </block>
 <block name="extend_js">
-	<script src="__STATIC__/Bootstrap/js/bootstrap-table.min.js"></script>
-	<script src="__STATIC__/Bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+    <script src="__STATIC__/Bootstrap/js/bootstrap-table.min.js"></script>
+    <script src="__STATIC__/Bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
 </block>
-
-
 <extend name="Public/base"/>
 <block name="body">
 
-	<!--上方工具条-->
-	<div class="col-md-12">
-		<div id="toolbar" class="btn-group">
-			<!--<button id="btn_add" type="button" class="btn btn-default">-->
-				<!--<span aria-hidden="true"></span>新增-->
-			<!--</button>-->
-			<!--<button id="btn_edit" type="button" class="btn btn-default">-->
-				<!--<span  aria-hidden="true"></span>修改-->
-			<!--</button>-->
-			<!--<button id="btn_delete" type="button" class="btn btn-default">-->
-				<!--<span aria-hidden="true"></span>删除-->
-			<!--</button>-->
-		</div>
-	</div>
-	<!--下方内容呈现-->
-	<div class="col-md-12">
-		<div class="table-responsive">
-			<table id="contentTable" class="table table-bordered table-hover table-striped"></table>
-		</div>
-	</div>
-	<script type="text/javascript">
+    <!--上方工具条-->
+    <div class="col-md-12">
+        <div id="toolbar" class="btn-group">
+            <!--<button id="btn_add" type="button" class="btn btn-default">-->
+            <!---->
+            <!--</button>-->
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#test">
+                <span aria-hidden="true">新增</span>
+            </button>
+            <!--<button id="btn_edit" type="button" class="btn btn-default">-->
+            <!--<span  aria-hidden="true"></span>修改-->
+            <!--</button>-->
+            <!--<button id="btn_delete" type="button" class="btn btn-default">-->
+            <!--<span aria-hidden="true"></span>删除-->
+            <!--</button>-->
+        </div>
+    </div>
+    <!--下方内容呈现-->
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table id="contentTable" class="table table-no-bordered table-hover table-striped"></table>
+        </div>
+    </div>
 
-		$(function () {
-			initInp()
-		});
 
-		function initInp() {
-			$("#contentTable").bootstrapTable({
-				url: "{:U('indexData')}",         //请求后台的URL（*）
-				method: 'get',                      //请求方式（*）
-				toolbar: '#toolbar',                //工具按钮用哪个容器
-				striped: true,                      //是否显示行间隔色
-				cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
-				pagination: true,                   //是否显示分页（*）
-				sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
-				pageNumber: 1,                       //初始化加载第一页，默认第一页
-				pageSize: 20,                       //每页的记录行数（*）
-				pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
-				search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端
-				strictSearch: true,                 // 动态搜索
-				showColumns: true,                  //是否显示所有的列
-				showRefresh: true,                  //是否显示刷新按钮
-				minimumCountColumns: 2,             //最少允许的列数
-				clickToSelect: true,                //是否启用点击选中行
-				singleSelect:true,                  //单选选项
-				height: 600,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
-				uniqueId: "id",                     //每一行的唯一标识，一般为主键列
-				showToggle: false,                    //是否显示详细视图和列表视图的切换按钮
-				cardView: false,                    //是否显示详细视图
-				detailView: false,                   //是否显示父子表
-				columns: [
-					{field: 'id', title: 'ID',hidden:true},
-					{field: "name", title: "用户名称", width: 80, sortable: true},
-					{field: "auth_id", title: "角色名称", width: 80, sortable: true},
-					{field: "group_id", title: "组织单位", width: 80, sortable: true},
-					{field: "tel", title: "联系方式", width: 80, sortable: true},
-					{field: "email", title: "邮箱", width: 80, sortable: true},
-					{field: "status", title: "用户状态", width: 80, sortable: true},
-					{field: "remark", title: "备注", width: 100, sortable: true},
-					{field: "operate", title: "操作", width: 120}
-				]
-			});
-		}
+    <!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">-->
+    <!--<div class="modal-dialog" role="document">-->
+    <!--<div class="modal-content">-->
+    <!--<div class="modal-header">-->
+    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+    <!--<h4 class="modal-title" id="exampleModalLabel">添加</h4>-->
+    <!--</div>-->
+    <div id="modal-footer">
+        <button type="button" class="btn btn-primary">Send message</button>
+    </div>
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
 
-	</script>
+    <script type="text/javascript">
+        var url = "{:U('indexData')}";
+        var columns = [
+            {field: 'id', title: 'ID', visible: false},
+            {field: "username", title: "用户名称", align: 'center', width: '60px'},
+            {field: "role_id", title: "用户角色", align: 'center', width: '60px'},
+            {field: "group_id", title: "单位名称", align: 'center', width: '80px'},
+            {field: "phone", title: "联系方式", align: 'center', width: '80px'},
+            {field: "email", title: "邮箱", align: 'center', width: '60px'},
+            {field: "status", title: "用户状态", align: 'center', width: '50px'},
+            {field: "remark", title: "备注说明", align: 'center', width: '100px'},
+            {field: "operate", title: "操作", align: 'center', width: '100px', formatter: operate}
+        ];
+        var method = "get";
+        App.initTable({
+            url: url,
+            columns: columns,
+            toolbar: '#toolbar',
+            method: method
+        });
 
-	<!--<div class="fixed-bar" id="User_Bar" style="height: auto">-->
-	<!--<div class="item-title">-->
+        App.initDialog({
+            id: 'test',
+            title: '测试对话框',
+            url:"{:U('add')}",
+            //body: '#modal-body',
+            footer: '#modal-footer'
+        });
+        //
+        function operate() {
+            return "<span class='icon iconfont icon-icon_plus'>编辑</span> &nbsp;&nbsp;<span class='icon iconfont icon-iconminus'>删除</span>";
+        }
 
-		<!--<form class="search_from">-->
-			<!--<table>-->
-				<!--<tr>-->
-					<!--<td>用户名称 : </td>-->
-					<!--<td><input id="s_username" name="s_action_id" type="text" class="easyui-combobox" style="height:25px;width: 180px"></td>-->
-					<!--<td><a href="javascript:;" class="easyui-linkbutton" onclick="click_search()"-->
-						   <!--data-options="iconCls:'icon-search',plain:true">查询</a></td>-->
-					<!--<td><if condition="Is_Auth('Admin/User/add')">-->
-						<!--<a href="javascript:;" class="easyui-linkbutton" onclick="click_add('div_dialog')"-->
-						   <!--data-options="iconCls:'icon-add',plain:true">添加</a></if></td>-->
-					<!--<td><a href="javascript:;" class="easyui-linkbutton" onclick="click_redo()"-->
-						   <!--data-options="iconCls:'icon-redo',plain:true">重置</a></td>-->
-				<!--</tr>-->
-			<!--</table>-->
-		<!--</form>-->
-		<!--&lt;!&ndash;<h3>用户列表</h3>&ndash;&gt;-->
-		<!--&lt;!&ndash;<ul class="tab-base">&ndash;&gt;-->
-			<!--&lt;!&ndash;&lt;!&ndash;<li><a class="current" href="JavaScript:void(0);" onclick="Data_Reload('User_Data_List');"><span>列表</span></a></li>&ndash;&gt;&ndash;&gt;-->
-			<!--&lt;!&ndash;<li><a href="JavaScript:void(0);" onclick="Data_Search('User_Search_From','User_Data_List');"><span>搜索用户</span></a></li>&ndash;&gt;-->
-			<!--&lt;!&ndash;<if condition="Is_Auth('Admin/User/add')">&ndash;&gt;-->
-			<!--&lt;!&ndash;<li><a href="{:U('Admin/User/add')}"><span>新增用户</span></a></li>&ndash;&gt;-->
-			<!--&lt;!&ndash;</if>&ndash;&gt;-->
-		<!--&lt;!&ndash;</ul>&ndash;&gt;-->
-	<!--</div>-->
-	<!--</div>-->
-	<!--<div style="display: none">-->
-		<!--<form id="User_Form" class="update_from"></form>-->
-	<!--</div>-->
-	<!--<div id="div_dialog" class="easyui-dialog"-->
-		 <!--data-options="closed:true,buttons:'#add-buttons',modal:true" title="用户管理"-->
-		 <!--style="width: 702px; height:auto; padding: 5px 10px;">-->
-		<!--<div id="div_ftitle" class="ftitle"></div>-->
-		<!--<form id="User_add_From" method="post" enctype="multipart/form-data">-->
-			<!--<div style="width:50%;float:left;">-->
-				<!--<div class="fitem">-->
-					<!--<label>用户名称：</label>-->
-					<!--<input id="inp_id" name="id" type="hidden"/>-->
-					<!--<input id="inp_username" name="username" type="text" class="easyui-textbox" style="height:30px;width: 180px" value="" data-options="required:true"/>-->
-					<!--<span style="color: #CC0000;margin-left: 5px;line-height: inherit;text-align:center;font-weight: bold;">*</span>-->
-				<!--</div>-->
-				<!--<div class="fitem">-->
-					<!--<label>用户密码：</label>-->
-					<!--<input id="inp_password" name="password" type="password" class="easyui-textbox" style="height:30px;width: 180px" value="" data-options="required:true,validType:'minLength[5]'"/>-->
-					<!--<span style="color: #CC0000;margin-left: 5px;line-height: inherit;text-align:center;font-weight: bold;">*</span>-->
-				<!--</div>-->
-				<!--<div class="fitem">-->
-					<!--<label>确认密码：</label>-->
-					<!--<input id="inp_eque_password" name="eque_password" type="password" class="easyui-textbox" required="required" validType="equals['#inp_password']" style="height:30px;width: 180px" value=""/>-->
-					<!--<span style="color: #CC0000;margin-left: 5px;line-height: inherit;text-align:center;font-weight: bold;">*</span>-->
-				<!--</div>-->
-				<!--<div class="fitem">-->
-					<!--<label>组织名称：</label>-->
-					<!--<input id="inp_service_group_id" name="service_group_id" class="easyui-combotree" style="height:30px;width: 180px;" data-options="url:'{:U("Admin/Function/getGroupInfosToTree")}',valueField:'id',textField:'text',multiple:false,required:true,editable:false,panelHeight:100"/>-->
-					<!--<span style="color: #CC0000;margin-left: 5px;line-height: inherit;text-align:center;font-weight: bold;">*</span>-->
-				<!--</div>-->
-				<!--<div class="fitem">-->
-					<!--<label>角色名称：</label>-->
-					<!--<input id="inp_group_ids" name="group_ids" class="easyui-combobox" style="height:30px;width: 180px;" data-options="url:'{:U("Admin/Function/getAuthList")}',valueField:'id',textField:'text',required:true,multiple:false,editable:false,panelHeight:100"/>-->
-					<!--<span style="color: #CC0000;margin-left: 5px;line-height: inherit;text-align:center;font-weight: bold;">*</span>-->
-				<!--</div>-->
-				<!--<div class="fitem">-->
-					<!--<label>邮箱：</label>-->
-					<!--<input id="inp_email" type="text" name="email" class="easyui-textbox" data-options="validType:'email'" style="height:30px;width: 180px;"/>-->
-				<!--</div>-->
-				<!--<div class="fitem">-->
-					<!--<label>电话：</label>-->
-					<!--<input id="inp_phone" type="text" name="phone" class="easyui-numberbox" data-options="validType:'phone'" style="height:30px;width: 180px;"/>-->
-				<!--</div>-->
-				<!--<div class="fitem">-->
-					<!--<label>状态：</label>-->
-					<!--<input id="inp_status" name="status" class="easyui-combobox" style="height:30px;width: 180px;" data-options="url:'{:U("Admin/Function/get_status_option")}',valueField:'id',textField:'text',multiple:false,required:false,editable:false,panelHeight:'auto'"/>-->
-					<!--<span style="color: #CC0000;margin-left: 5px;line-height: inherit;text-align:center;font-weight: bold;">*</span>-->
-				<!--</div>-->
-			<!--</div>-->
-			<!--<div style="width:50%;float:left;">-->
-				<!--<div>-->
-					<!--<label style="margin-left:20px;">用户头像：</label>-->
-					<!--<img id="img_photo" alt="头像预览" style=" width:240px; height:260px;"/>-->
-					<!--<input id="inp_head_img"-->
-						   <!--style="margin-top: 10px;margin-left:10px;border-radius:10px;-moz-border-radius:10px;-->
-                            <!-- -ms-border-radius:10px;-o-border-radius:10px;-webkit-border-radius:10px;border:1px solid #ccc;-->
-                           <!--font-size:10pt;padding:5px 10px;width: 300px;height: 30px" class="uploadbutton" type="file" name="user_photo"-->
-						   <!--accept="image/*" onchange=fileSelected() />-->
-				<!--</div>-->
 
-				<!--<div class="fitem">-->
-					<!--<label>备注：</label>-->
-					<!--<input id="inp_remark" type="text" name="remark" class="easyui-textbox" style="height:30px;width: 180px;"/>-->
-				<!--</div>-->
-			<!--</div>-->
-		<!--</form>-->
-		<!--<div id="add-buttons">-->
-			<!--<a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-ok"-->
-			   <!--onclick=operateSure()>确定</a>-->
-			<!--<a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel"-->
-			   <!--onclick=operateCancel("div_dialog")>取消</a>-->
-		<!--</div>-->
-	<!--</div>-->
+    </script>
 
-	<!--<div id="edit_dialog" class="easyui-dialog"-->
-		 <!--data-options="closed:true,buttons:'#edit-buttons',modal:true" title="用户管理"-->
-		 <!--style="width: 702px; height: 400px; padding: 5px 10px;">-->
-		<!--<div id="edit_tabs" class="easyui-tabs" data-options="fit:true,border:false" style="padding: 5px 10px;">-->
-			<!--<div title="用户信息" style="padding:10px;">-->
-				<!--<form id="User_edit_From" method="post" enctype="multipart/form-data">-->
-					<!--<div style="width:50%;float:left;">-->
-						<!--<div class="fitem">-->
-							<!--<label>用户名称：</label>-->
-							<!--<input id="edit_id" name="id" type="hidden"/>-->
-							<!--<input id="edit_username" name="username" type="text" class="easyui-textbox" style="height:30px;width: 180px" data-options="disabled:true,editable:false,readonly:true"/>-->
-						<!--</div>-->
-						<!--<div class="fitem">-->
-							<!--<label>所属单位：</label>-->
-							<!--<input id="edit_service_group_id" name="service_group_id" class="easyui-combotree" style="height:30px;width: 180px;" data-options="url:'{:U("Admin/Function/getGroupInfosToTree")}',valueField:'id',textField:'text',multiple:false,required:true,editable:false,panelHeight:100" />-->
-							<!--<span style="color: #CC0000;margin-left: 5px;line-height: inherit;text-align:center;font-weight: bold;">*</span>-->
-						<!--</div>-->
-						<!--<div class="fitem">-->
-							<!--<label>角色名称：</label>-->
-							<!--<input id="edit_group_ids" name="group_ids" class="easyui-combobox" style="height:30px;width: 180px;"  data-options="url:'{:U("Admin/Function/getAuthList")}',valueField:'id',textField:'text',required:true,multiple:false,editable:false,panelHeight:100"/>-->
-							<!--<span style="color: #CC0000;margin-left: 5px;line-height: inherit;text-align:center;font-weight: bold;">*</span>-->
-						<!--</div>-->
-						<!--<div class="fitem">-->
-							<!--<label>邮箱：</label>-->
-							<!--<input id="edit_email" type="text" name="email" data-options="validType:'email'" class="easyui-textbox" style="height:30px;width: 180px;" />-->
-						<!--</div>-->
-						<!--<div class="fitem">-->
-							<!--<label>电话：</label>-->
-							<!--<input id="edit_phone" type="text" name="phone" data-options="validType:'phone'" class="easyui-numberbox" style="height:30px;width: 180px;" />-->
-						<!--</div>-->
-						<!--<div class="fitem">-->
-							<!--<label>状态：</label>-->
-							<!--<input id="edit_status" name="status" class="easyui-combobox" style="height:30px;width: 180px;" data-options="url:'{:U("Admin/Function/get_status_option")}',valueField:'id',textField:'text',editable:false,panelHeight:'auto'"/>-->
-							<!--<span style="color: #CC0000;margin-left: 5px;line-height: inherit;text-align:center;font-weight: bold;">*</span>-->
-						<!--</div>-->
-					<!--</div>-->
-					<!--<div style="width:50%;float:left;">-->
-						<!--<div>-->
-							<!--<label style="margin-left:20px;">用户头像：</label>-->
-							<!--<img id="edit_photo" alt="头像预览" style=" width:180px; height:170px;"/>-->
-							<!--<input id="edit_head_img"-->
-								   <!--style="margin-top: 10px;margin-left:10px;border-radius:10px;-moz-border-radius:10px;-->
-                            <!-- -ms-border-radius:10px;-o-border-radius:10px;-webkit-border-radius:10px;border:1px solid #ccc;-->
-                           <!--font-size:10pt;padding:5px 10px;width: 270px;height: 26px" class="uploadbutton" type="file" name="user_photo"-->
-								   <!--accept="image/*" onchange=fileSelected() />-->
-						<!--</div>-->
+    <!--<div class="fixed-bar" id="User_Bar" style="height: auto">-->
+    <!--<div class="item-title">-->
 
-						<!--<div class="fitem">-->
-							<!--<label>备注：</label>-->
-							<!--<input id="edit_remark" type="text" name="remark" class="easyui-textbox" style="height:30px;width: 180px;" />-->
-						<!--</div>-->
-					<!--</div>-->
-				<!--</form>-->
-			<!--</div>-->
-			<!--<div title="修改密码"style="padding:10px;">-->
-				<!--<form id="Updatepassword" method="post">-->
-					<!--<div style="width:50%;float:left;">-->
-						<!--<div class="fitem">-->
-							<!--<input id="edit_user_id" name="id" type="hidden"/>-->
-							<!--<label>用户名称：</label>-->
-							<!--<input id="pas_username" name="username" type="text" class="easyui-textbox" style="height:30px;width: 180px" data-options="disabled:true,readonly:true,editable:false"/>-->
-						<!--</div>-->
-						<!--<div class="fitem">-->
-							<!--<label>新密码：</label>-->
-							<!--<input id="edit_new_password" name="new_password" type="password" class="easyui-textbox" style="height:30px;width: 180px;"  data-options="required:true,validType:'minLength[5]'"/>-->
-							<!--<span style="color: #CC0000;margin-left: 5px;line-height: inherit;text-align:center;font-weight: bold;">*</span>-->
-						<!--</div>-->
-						<!--<div class="fitem">-->
-							<!--<label>确认密码：</label>-->
-							<!--<input id="edit_eque_password" name="eque_password" type="password" class="easyui-textbox" style="height:30px;width: 180px;" required="required" validType="equals['#edit_new_password']" />-->
-							<!--<span style="color: #CC0000;margin-left: 5px;line-height: inherit;text-align:center;font-weight: bold;">*</span>-->
-						<!--</div>-->
-					<!--</div>-->
-				<!--</form>-->
-			<!--</div>-->
-		<!--</div>-->
-		<!--<div id="edit-buttons">-->
-			<!--<a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-ok"-->
-			   <!--onclick=operateSure()>确定</a>-->
-			<!--<a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel"-->
-			   <!--onclick=operateCancel("edit_dialog")>取消</a>-->
-		<!--</div>-->
-	<!--</div>-->
+    <!--<form class="search_from">-->
+    <!--<table>-->
+    <!--<tr>-->
+    <!--<td>用户名称 : </td>-->
+    <!--<td><input id="s_username" name="s_action_id" type="text" class="easyui-combobox" style="height:25px;width: 180px"></td>-->
+    <!--<td><a href="javascript:;" class="easyui-linkbutton" onclick="click_search()"-->
+    <!--data-options="iconCls:'icon-search',plain:true">查询</a></td>-->
+    <!--<td><if condition="Is_Auth('Admin/User/add')">-->
+    <!--<a href="javascript:;" class="easyui-linkbutton" onclick="click_add('div_dialog')"-->
+    <!--data-options="iconCls:'icon-add',plain:true">添加</a></if></td>-->
+    <!--<td><a href="javascript:;" class="easyui-linkbutton" onclick="click_redo()"-->
+    <!--data-options="iconCls:'icon-redo',plain:true">重置</a></td>-->
+    <!--</tr>-->
+    <!--</table>-->
+    <!--</form>-->
+    <!--&lt;!&ndash;<h3>用户列表</h3>&ndash;&gt;-->
+    <!--&lt;!&ndash;<ul class="tab-base">&ndash;&gt;-->
+    <!--&lt;!&ndash;&lt;!&ndash;<li><a class="current" href="JavaScript:void(0);" onclick="Data_Reload('User_Data_List');"><span>列表</span></a></li>&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;<li><a href="JavaScript:void(0);" onclick="Data_Search('User_Search_From','User_Data_List');"><span>搜索用户</span></a></li>&ndash;&gt;-->
+    <!--&lt;!&ndash;<if condition="Is_Auth('Admin/User/add')">&ndash;&gt;-->
+    <!--&lt;!&ndash;<li><a href="{:U('Admin/User/add')}"><span>新增用户</span></a></li>&ndash;&gt;-->
+    <!--&lt;!&ndash;</if>&ndash;&gt;-->
+    <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div style="display: none">-->
+    <!--<form id="User_Form" class="update_from"></form>-->
+    <!--</div>-->
+    <!--<div id="div_dialog" class="easyui-dialog"-->
+    <!--data-options="closed:true,buttons:'#add-buttons',modal:true" title="用户管理"-->
+    <!--style="width: 702px; height:auto; padding: 5px 10px;">-->
+    <!--<div id="div_ftitle" class="ftitle"></div>-->
+    <!--<form id="User_add_From" method="post" enctype="multipart/form-data">-->
+    <!--<div style="width:50%;float:left;">-->
+    <!--<div class="fitem">-->
+    <!--<label>用户名称：</label>-->
+    <!--<input id="inp_id" name="id" type="hidden"/>-->
+    <!--<input id="inp_username" name="username" type="text" class="easyui-textbox" style="height:30px;width: 180px" value="" data-options="required:true"/>-->
+    <!--<span style="color: #CC0000;margin-left: 5px;line-height: inherit;text-align:center;font-weight: bold;">*</span>-->
+    <!--</div>-->
+    <!--<div class="fitem">-->
+    <!--<label>用户密码：</label>-->
+    <!--<input id="inp_password" name="password" type="password" class="easyui-textbox" style="height:30px;width: 180px" value="" data-options="required:true,validType:'minLength[5]'"/>-->
+    <!--<span style="color: #CC0000;margin-left: 5px;line-height: inherit;text-align:center;font-weight: bold;">*</span>-->
+    <!--</div>-->
+    <!--<div class="fitem">-->
+    <!--<label>确认密码：</label>-->
+    <!--<input id="inp_eque_password" name="eque_password" type="password" class="easyui-textbox" required="required" validType="equals['#inp_password']" style="height:30px;width: 180px" value=""/>-->
+    <!--<span style="color: #CC0000;margin-left: 5px;line-height: inherit;text-align:center;font-weight: bold;">*</span>-->
+    <!--</div>-->
+    <!--<div class="fitem">-->
+    <!--<label>组织名称：</label>-->
+    <!--<input id="inp_service_group_id" name="service_group_id" class="easyui-combotree" style="height:30px;width: 180px;" data-options="url:'{:U("Admin/Function/getGroupInfosToTree")}',valueField:'id',textField:'text',multiple:false,required:true,editable:false,panelHeight:100"/>-->
+    <!--<span style="color: #CC0000;margin-left: 5px;line-height: inherit;text-align:center;font-weight: bold;">*</span>-->
+    <!--</div>-->
+    <!--<div class="fitem">-->
+    <!--<label>角色名称：</label>-->
+    <!--<input id="inp_group_ids" name="group_ids" class="easyui-combobox" style="height:30px;width: 180px;" data-options="url:'{:U("Admin/Function/getAuthList")}',valueField:'id',textField:'text',required:true,multiple:false,editable:false,panelHeight:100"/>-->
+    <!--<span style="color: #CC0000;margin-left: 5px;line-height: inherit;text-align:center;font-weight: bold;">*</span>-->
+    <!--</div>-->
+    <!--<div class="fitem">-->
+    <!--<label>邮箱：</label>-->
+    <!--<input id="inp_email" type="text" name="email" class="easyui-textbox" data-options="validType:'email'" style="height:30px;width: 180px;"/>-->
+    <!--</div>-->
+    <!--<div class="fitem">-->
+    <!--<label>电话：</label>-->
+    <!--<input id="inp_phone" type="text" name="phone" class="easyui-numberbox" data-options="validType:'phone'" style="height:30px;width: 180px;"/>-->
+    <!--</div>-->
+    <!--<div class="fitem">-->
+    <!--<label>状态：</label>-->
+    <!--<input id="inp_status" name="status" class="easyui-combobox" style="height:30px;width: 180px;" data-options="url:'{:U("Admin/Function/get_status_option")}',valueField:'id',textField:'text',multiple:false,required:false,editable:false,panelHeight:'auto'"/>-->
+    <!--<span style="color: #CC0000;margin-left: 5px;line-height: inherit;text-align:center;font-weight: bold;">*</span>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div style="width:50%;float:left;">-->
+    <!--<div>-->
+    <!--<label style="margin-left:20px;">用户头像：</label>-->
+    <!--<img id="img_photo" alt="头像预览" style=" width:240px; height:260px;"/>-->
+    <!--<input id="inp_head_img"-->
+    <!--style="margin-top: 10px;margin-left:10px;border-radius:10px;-moz-border-radius:10px;-->
+    <!-- -ms-border-radius:10px;-o-border-radius:10px;-webkit-border-radius:10px;border:1px solid #ccc;-->
+    <!--font-size:10pt;padding:5px 10px;width: 300px;height: 30px" class="uploadbutton" type="file" name="user_photo"-->
+    <!--accept="image/*" onchange=fileSelected() />-->
+    <!--</div>-->
+
+    <!--<div class="fitem">-->
+    <!--<label>备注：</label>-->
+    <!--<input id="inp_remark" type="text" name="remark" class="easyui-textbox" style="height:30px;width: 180px;"/>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</form>-->
+    <!--<div id="add-buttons">-->
+    <!--<a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-ok"-->
+    <!--onclick=operateSure()>确定</a>-->
+    <!--<a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel"-->
+    <!--onclick=operateCancel("div_dialog")>取消</a>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div id="edit_dialog" class="easyui-dialog"-->
+    <!--data-options="closed:true,buttons:'#edit-buttons',modal:true" title="用户管理"-->
+    <!--style="width: 702px; height: 400px; padding: 5px 10px;">-->
+    <!--<div id="edit_tabs" class="easyui-tabs" data-options="fit:true,border:false" style="padding: 5px 10px;">-->
+    <!--<div title="用户信息" style="padding:10px;">-->
+    <!--<form id="User_edit_From" method="post" enctype="multipart/form-data">-->
+    <!--<div style="width:50%;float:left;">-->
+    <!--<div class="fitem">-->
+    <!--<label>用户名称：</label>-->
+    <!--<input id="edit_id" name="id" type="hidden"/>-->
+    <!--<input id="edit_username" name="username" type="text" class="easyui-textbox" style="height:30px;width: 180px" data-options="disabled:true,editable:false,readonly:true"/>-->
+    <!--</div>-->
+    <!--<div class="fitem">-->
+    <!--<label>所属单位：</label>-->
+    <!--<input id="edit_service_group_id" name="service_group_id" class="easyui-combotree" style="height:30px;width: 180px;" data-options="url:'{:U("Admin/Function/getGroupInfosToTree")}',valueField:'id',textField:'text',multiple:false,required:true,editable:false,panelHeight:100" />-->
+    <!--<span style="color: #CC0000;margin-left: 5px;line-height: inherit;text-align:center;font-weight: bold;">*</span>-->
+    <!--</div>-->
+    <!--<div class="fitem">-->
+    <!--<label>角色名称：</label>-->
+    <!--<input id="edit_group_ids" name="group_ids" class="easyui-combobox" style="height:30px;width: 180px;"  data-options="url:'{:U("Admin/Function/getAuthList")}',valueField:'id',textField:'text',required:true,multiple:false,editable:false,panelHeight:100"/>-->
+    <!--<span style="color: #CC0000;margin-left: 5px;line-height: inherit;text-align:center;font-weight: bold;">*</span>-->
+    <!--</div>-->
+    <!--<div class="fitem">-->
+    <!--<label>邮箱：</label>-->
+    <!--<input id="edit_email" type="text" name="email" data-options="validType:'email'" class="easyui-textbox" style="height:30px;width: 180px;" />-->
+    <!--</div>-->
+    <!--<div class="fitem">-->
+    <!--<label>电话：</label>-->
+    <!--<input id="edit_phone" type="text" name="phone" data-options="validType:'phone'" class="easyui-numberbox" style="height:30px;width: 180px;" />-->
+    <!--</div>-->
+    <!--<div class="fitem">-->
+    <!--<label>状态：</label>-->
+    <!--<input id="edit_status" name="status" class="easyui-combobox" style="height:30px;width: 180px;" data-options="url:'{:U("Admin/Function/get_status_option")}',valueField:'id',textField:'text',editable:false,panelHeight:'auto'"/>-->
+    <!--<span style="color: #CC0000;margin-left: 5px;line-height: inherit;text-align:center;font-weight: bold;">*</span>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div style="width:50%;float:left;">-->
+    <!--<div>-->
+    <!--<label style="margin-left:20px;">用户头像：</label>-->
+    <!--<img id="edit_photo" alt="头像预览" style=" width:180px; height:170px;"/>-->
+    <!--<input id="edit_head_img"-->
+    <!--style="margin-top: 10px;margin-left:10px;border-radius:10px;-moz-border-radius:10px;-->
+    <!-- -ms-border-radius:10px;-o-border-radius:10px;-webkit-border-radius:10px;border:1px solid #ccc;-->
+    <!--font-size:10pt;padding:5px 10px;width: 270px;height: 26px" class="uploadbutton" type="file" name="user_photo"-->
+    <!--accept="image/*" onchange=fileSelected() />-->
+    <!--</div>-->
+
+    <!--<div class="fitem">-->
+    <!--<label>备注：</label>-->
+    <!--<input id="edit_remark" type="text" name="remark" class="easyui-textbox" style="height:30px;width: 180px;" />-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</form>-->
+    <!--</div>-->
+    <!--<div title="修改密码"style="padding:10px;">-->
+    <!--<form id="Updatepassword" method="post">-->
+    <!--<div style="width:50%;float:left;">-->
+    <!--<div class="fitem">-->
+    <!--<input id="edit_user_id" name="id" type="hidden"/>-->
+    <!--<label>用户名称：</label>-->
+    <!--<input id="pas_username" name="username" type="text" class="easyui-textbox" style="height:30px;width: 180px" data-options="disabled:true,readonly:true,editable:false"/>-->
+    <!--</div>-->
+    <!--<div class="fitem">-->
+    <!--<label>新密码：</label>-->
+    <!--<input id="edit_new_password" name="new_password" type="password" class="easyui-textbox" style="height:30px;width: 180px;"  data-options="required:true,validType:'minLength[5]'"/>-->
+    <!--<span style="color: #CC0000;margin-left: 5px;line-height: inherit;text-align:center;font-weight: bold;">*</span>-->
+    <!--</div>-->
+    <!--<div class="fitem">-->
+    <!--<label>确认密码：</label>-->
+    <!--<input id="edit_eque_password" name="eque_password" type="password" class="easyui-textbox" style="height:30px;width: 180px;" required="required" validType="equals['#edit_new_password']" />-->
+    <!--<span style="color: #CC0000;margin-left: 5px;line-height: inherit;text-align:center;font-weight: bold;">*</span>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</form>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div id="edit-buttons">-->
+    <!--<a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-ok"-->
+    <!--onclick=operateSure()>确定</a>-->
+    <!--<a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel"-->
+    <!--onclick=operateCancel("edit_dialog")>取消</a>-->
+    <!--</div>-->
+    <!--</div>-->
 
 </block>

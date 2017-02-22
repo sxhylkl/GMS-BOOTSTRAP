@@ -79,8 +79,7 @@ class AdminCoreModel extends Model
             $map ['system_user'] = array('in', "0,1");
         }
         $map['_logic'] = "and";
-
-        $map['status'] = 1;
+        $map['status'] = 0;
 
         $total = $this->where($map)->count();
         if ($total == 0) {

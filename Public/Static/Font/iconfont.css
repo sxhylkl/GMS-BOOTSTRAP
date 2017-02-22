@@ -1,10 +1,10 @@
 
 @font-face {font-family: "iconfont";
-  src: url('iconfont.eot?t=1484048880950'); /* IE9*/
-  src: url('iconfont.eot?t=1484048880950#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('iconfont.woff?t=1484048880950') format('woff'), /* chrome, firefox */
-  url('iconfont.ttf?t=1484048880950') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('iconfont.svg?t=1484048880950#iconfont') format('svg'); /* iOS 4.1- */
+  src: url('iconfont.eot?t=1487768509323'); /* IE9*/
+  src: url('iconfont.eot?t=1487768509323#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1487768509323') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1487768509323') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1487768509323#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .iconfont {
@@ -40,6 +40,10 @@
 .icon-collapse-xia:before { content: "\e652"; }
 
 .icon-jiantou-zuo:before { content: "\e601"; }
+
+.icon-checked:before { content: "\e646"; }
+
+.icon-uncheck:before { content: "\e622"; }
 
 .icon-collapse-shang:before { content: "\e66b"; }
 

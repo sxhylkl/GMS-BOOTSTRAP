@@ -55,61 +55,61 @@ class UserController extends AdminCoreController {
      * Auth   : Ghj
      * Time   : 2016年01月10日 
      **/
-	public function add(){
-
-        $result = array();
-        $result['Result'] = false;
-        $result['Code'] = 200;
-
-		if(IS_POST){
-
-			$post_data=I('post.');
-
-            //判断上传图片大小是否为0
-            if(0 != intval($_FILES['user_photo']['size'])){
-                $post_data['head_img'] = $this->fileUpload();
-            }
-            else{
-                $post_data['head_img'] = "";
-            }
-
-
-            unset($post_data['id']);
-
-			$data=$this->Model->create($post_data);
-			if($data){
-
-				if($post_data['password'] === $post_data['eque_password']){
-					$res = $this->Model->add($data);
-					if(false !== $res){
-						action_log('Add_User', 'User', $res);
-                        $result['Result'] = true;
-                        $result['Msg'] = '数据添加成功';
-//						$this->success ( "操作成功！",U('index'));
-					}else{
-						$error = $this->Model->getError();
-//						$this->error($error ? $error : "操作失败！");
-
-                        $result['Msg'] = $error ? $error : "操作失败！";
-					}
-				}
-				else{
-					$error = $this->Model->getError();
-//					$this->error($error ? $error : "密码与确认密码不相同！");
-                    $result['Msg'] = $error ? $error : "操作失败！";
-				}
-			}
-			else{
-                $error = $this->Model->getError();
-//                $this->error($error ? $error : "操作失败！");
-
-                $result['Msg'] = $error ? $error : "操作失败！";
-			}
-
-            echo json_encode($result);
-//			$this->ajaxReturn($result);
-		}
-	}
+//	public function add(){
+//
+//        $result = array();
+//        $result['Result'] = false;
+//        $result['Code'] = 200;
+//
+//		if(IS_POST){
+//
+//			$post_data=I('post.');
+//
+//            //判断上传图片大小是否为0
+//            if(0 != intval($_FILES['user_photo']['size'])){
+//                $post_data['head_img'] = $this->fileUpload();
+//            }
+//            else{
+//                $post_data['head_img'] = "";
+//            }
+//
+//
+//            unset($post_data['id']);
+//
+//			$data=$this->Model->create($post_data);
+//			if($data){
+//
+//				if($post_data['password'] === $post_data['eque_password']){
+//					$res = $this->Model->add($data);
+//					if(false !== $res){
+//						action_log('Add_User', 'User', $res);
+//                        $result['Result'] = true;
+//                        $result['Msg'] = '数据添加成功';
+////						$this->success ( "操作成功！",U('index'));
+//					}else{
+//						$error = $this->Model->getError();
+////						$this->error($error ? $error : "操作失败！");
+//
+//                        $result['Msg'] = $error ? $error : "操作失败！";
+//					}
+//				}
+//				else{
+//					$error = $this->Model->getError();
+////					$this->error($error ? $error : "密码与确认密码不相同！");
+//                    $result['Msg'] = $error ? $error : "操作失败！";
+//				}
+//			}
+//			else{
+//                $error = $this->Model->getError();
+////                $this->error($error ? $error : "操作失败！");
+//
+//                $result['Msg'] = $error ? $error : "操作失败！";
+//			}
+//
+//            echo json_encode($result);
+////			$this->ajaxReturn($result);
+//		}
+//	}
 	
     /* 编辑
      * Auth   : Ghj

@@ -76,82 +76,94 @@
         </div><!-- /.container-fluid -->
     </nav>
     <div class="container panel-main-content">
-            <!--主题内容-->
+        <!--主题内容-->
         <div class="row" style="height: 100%">
-                    <!--左侧菜单-->
-                    <div class="col-sm-2 sidebar">
-                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                            <ul class="list-group">
-                                <foreach name="Menu" item="menu">
-                                    <div class="list-group-item" role="tab" id="head_{$menu['id']}">
-                                        <a data-toggle="collapse" data-parent="#accordion" menuTitle="{$menu['title']}" menuType="{$menu['type']}" menuHis="{$menu['title']}" menuUrl="{$menu['url']}"
-                                           href="#collapse_{$menu['id']}" aria-expanded="false" aria-controls="collapse_{$menu['id']}">
-                                            <i class="icon iconfont {$menu['icon']}"></i>
-                                            <span>{$menu['title']}</span>
-                                            <if condition="$menu['type'] eq 1">
-                                                <i class="icon iconfont icon-jiantou-you" style="float: right"></i>
-                                            </if>
-                                        </a>
-                                        <notempty name="menu['children']">
-                                            <div id="collapse_{$menu['id']}" class="panel-collapse collapse"
-                                                 role="tabpanel" aria-labelledby="head_{$menu['id']}">
-                                                <ul class="panel-heading list-unstyled sidebar-panel" id="sub_acc"
-                                                    role="tablist" aria-multiselectable="true">
-                                                    <foreach name="menu['children']" item="sub_menu1">
+            <!--左侧菜单-->
+            <div class="col-sm-2 sidebar">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <ul class="list-group">
+                        <foreach name="Menu" item="menu">
+                            <div class="list-group-item" role="tab" id="head_{$menu['id']}">
+                                <a data-toggle="collapse" data-parent="#accordion" menuTitle="{$menu['title']}"
+                                   menuType="{$menu['type']}" menuHis="{$menu['title']}" menuUrl="{$menu['url']}"
+                                   href="#collapse_{$menu['id']}" aria-expanded="false"
+                                   aria-controls="collapse_{$menu['id']}">
+                                    <i class="icon iconfont {$menu['icon']}"></i>
+                                    <span>{$menu['title']}</span>
+                                    <if condition="$menu['type'] eq 1">
+                                        <i class="icon iconfont icon-jiantou-you" style="float: right"></i>
+                                    </if>
+                                </a>
+                                <notempty name="menu['children']">
+                                    <div id="collapse_{$menu['id']}" class="panel-collapse collapse"
+                                         role="tabpanel" aria-labelledby="head_{$menu['id']}">
+                                        <ul class="panel-heading list-unstyled sidebar-panel" id="sub_acc"
+                                            role="tablist" aria-multiselectable="true">
+                                            <foreach name="menu['children']" item="sub_menu1">
 
-                                                        <div role="tab" id="sub_head_{$sub_menu1['id']}">
-                                                            <a data-toggle="collapse" data-parent="#sub_acc" menuTitle="{$sub_menu1['title']}" menuType="{$sub_menu1['type']}" menuHis="{$menu['title']},{$sub_menu1['title']}" menuUrl="{$sub_menu1['url']}"
-                                                               href="#sub_collapse_{$sub_menu1['id']}" aria-expanded="false" aria-controls="sub_collapse_{$sub_menu1['id']}">
-                                                                <i class="icon iconfont {$sub_menu1['icon']}"></i>
-                                                                <span>{$sub_menu1['title']}</span>
-                                                                <if condition="$sub_menu1['type'] eq 1">
-                                                                    <i class="icon iconfont icon-jiantou-you" style="float: right"></i>
-                                                                </if>
-                                                                <br>
-                                                                <notempty name="sub_menu1['children']">
-                                                                    <div id="sub_collapse_{$sub_menu1['id']}"
-                                                                         class="panel-collapse collapse"
-                                                                         role="tabpanel">
-                                                                        <div class="panel-heading sidebar-panel">
-                                                                            <foreach name="sub_menu1['children']" item="sub_menu2">
-                                                                                <a href="#" menuTitle="{$sub_menu2['title']}" menuType="{$sub_menu2['type']}" menuHis="{$menu['title']},{$sub_menu1['title']},{$sub_menu2['title']}" menuUrl="{$sub_menu2['url']}">{$sub_menu2['title']}</a><br>
-                                                                            </foreach>
-                                                                        </div>
-                                                                    </div>
-                                                                </notempty>
-                                                            </a>
-                                                        </div>
+                                                <div role="tab" id="sub_head_{$sub_menu1['id']}">
+                                                    <a data-toggle="collapse" data-parent="#sub_acc"
+                                                       menuTitle="{$sub_menu1['title']}" menuType="{$sub_menu1['type']}"
+                                                       menuHis="{$menu['title']},{$sub_menu1['title']}"
+                                                       menuUrl="{$sub_menu1['url']}"
+                                                       href="#sub_collapse_{$sub_menu1['id']}" aria-expanded="false"
+                                                       aria-controls="sub_collapse_{$sub_menu1['id']}">
+                                                        <i class="icon iconfont {$sub_menu1['icon']}"></i>
+                                                        <span>{$sub_menu1['title']}</span>
+                                                        <if condition="$sub_menu1['type'] eq 1">
+                                                            <i class="icon iconfont icon-jiantou-you"
+                                                               style="float: right"></i>
+                                                        </if>
+                                                        <br>
+                                                        <notempty name="sub_menu1['children']">
+                                                            <div id="sub_collapse_{$sub_menu1['id']}"
+                                                                 class="panel-collapse collapse"
+                                                                 role="tabpanel">
+                                                                <div class="panel-heading sidebar-panel">
+                                                                    <foreach name="sub_menu1['children']"
+                                                                             item="sub_menu2">
+                                                                        <a href="#" menuTitle="{$sub_menu2['title']}"
+                                                                           menuType="{$sub_menu2['type']}"
+                                                                           menuHis="{$menu['title']},{$sub_menu1['title']},{$sub_menu2['title']}"
+                                                                           menuUrl="{$sub_menu2['url']}">{$sub_menu2['title']}</a><br>
+                                                                    </foreach>
+                                                                </div>
+                                                            </div>
+                                                        </notempty>
+                                                    </a>
+                                                </div>
 
-                                                    </foreach>
-                                                </ul>
-                                            </div>
-                                        </notempty>
+                                            </foreach>
+                                        </ul>
                                     </div>
-                                </foreach>
-                            </ul>
-                        </div>
-                    </div>
-                    <!--右侧内容-->
-                    <div class="col-sm-10 content">
-                        <div class="panel  panel-info content-panel">
-                            <!--右侧内容头部-->
-                            <div class="panel-heading breadcrumb" style="height: 40px"></div>
-                            <!--右侧内容正文-->
-                            <div  style="width:100%; position:absolute; top:60px;bottom:0px;padding: 0">
-                                <iframe id="main-content" style="height: 100%;width: 100%;border: 0;" scrolling="no" allowtransparency="yes"></iframe>
+                                </notempty>
                             </div>
-                        </div>
-                    </div>
-
+                        </foreach>
+                    </ul>
                 </div>
+            </div>
+            <!--右侧内容-->
+            <div class="col-sm-10 content">
+                <div class="panel  panel-info content-panel">
+                    <!--右侧内容头部-->
+                    <div class="panel-heading breadcrumb" style="height: 40px"></div>
+                    <!--右侧内容正文-->
+                    <div style="width:100%; position:absolute; top:60px;bottom:0px;padding: 0">
+                        <iframe id="main-content" style="height: 100%;width: 100%;border: 0;" scrolling="no"
+                                allowtransparency="yes"></iframe>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
     <!--版权信息-->
     <div class="panel-main-footer">
         <span>Powered by {:C('SOFT_NAME')} | Copyright © All rights reserved.</span>
     </div>
-
-    <js href="Public/Admin/js/main.js"/>
-    <!--<js href="Public/Admin/js/app.js"/>-->
-
+    <!--<js href="Public/Admin/js/main.js"/>-->
+    <script type="text/javascript">
+        App.init();
+    </script>
     </body>
 </block>
